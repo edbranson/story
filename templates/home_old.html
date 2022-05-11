@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<style>
+
+</style>
+{% endblock %}    
+
+{% block content %}
+
+
+<div id="main">
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="btn">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}" class="btn">Login/Sign Up</a>
+    {% endif %}
+    <button id="openbtn" class="openbtn" style="display: none" onclick="openNav()">☰</button><br><br>  
+    <div id="branding">
+        <h3 id="site-name">Book and Video Log</h3>
+    <div>
+    <div id = container>
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <table class="table table-bordered table-sortable" id="mediaTable">
+                    <thread>
+                        <tr>
+                            <th onclick="sortTable(3)">Title</th>
+                            <th onclick="sortTable(4)">Author</th>
+                            <th onclick="sortTable(5)">Actors</th>
+                            <th onclick="sortTable(6)">Rating</th>
+                        </tr>
+                    </thread>
+                    <tbody id="entryTbody">
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>    
+</div>    
+
+
+      
+
+{% endblock content%}

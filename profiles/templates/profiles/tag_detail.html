@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block topBar %}
+<div class="float-right">
+    <form>
+        <div >
+            <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" id="editTagSave" type="submit" value="Save">
+        </div>    
+    </form>
+</div> 
+<div class="float-right">
+    <form action="{% url 'tag-list' %}", method = "GET">
+        <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
+    </form>
+</div>
+
+<div class="float-right">
+    <form action=""  id="deleteButtonForm">
+        {% csrf_token %}
+        <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Delete" id="deleteTagButton">
+    </form>
+</div>
+<div class="float-right">
+    <form action="{% url 'tag-delete' pk=tag.id %}" method = "POST" id="confirmDeleteProfileForm">
+        {% csrf_token %}
+        <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Confirm Delete" id="confirmDelete" style="display: none">  
+    </form>
+</div>
+<div class="text-center text-xl align-bottom">Tag Edit</div>
+{% endblock topBar %}
+
+
+{% block main %}
+
+<div>
+    {% include "messages.html" %}
+    <div class="flex-row items-center m-5 p-5 bg-green-200">
+        <h1 class="text-lg font-bold">Tag Detail </h1>
+        <form id="tagEditForm" action="", method = "POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+        </form>
+        <br>
+       
+    </div>    
+</div>    
+
+<script>
+    const deleteP = document.getElementById("deleteTagButton");
+    const deleteC = document.getElementById("confirmDelete"); 
+    const save = document.getElementById("editTagSave");
+    deleteP.addEventListener('click', deleteTagConfirm);
+    save.addEventListener('click', submitTagSave);
+   
+
+    function deleteTagConfirm(event){
+        event.preventDefault();
+        document.getElementById("deleteTagButton").classList.add("hidden");
+        document.getElementById("editTagSave").classList.add("hidden");
+        deleteP.disabled = true;
+        save.disabled = true;   
+        document.getElementById('confirmDelete').style.display = "inline"
+    };
+    
+    function submitTagSave(event){
+        event.preventDefault();    
+        document.getElementById("tagEditForm").submit();
+    };
+
+</script>
+
+
+{% endblock main %}

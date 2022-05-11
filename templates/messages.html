@@ -1,0 +1,25 @@
+{% if messages %}
+
+{% for message in messages %}
+<div class="alert  alert--{{message.tags}}" id="alertMessage">
+    <p class="alert__message">{{message}}</p>
+    <button class="alert__close" id=alertButton>x</button>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+<script>
+    if (document.getElementById("alertButton")){
+        const deleteM = document.getElementById("alertButton");
+
+        deleteM.addEventListener('click', deleteMessage);
+    };
+   
+
+    function deleteMessage(event){
+        event.preventDefault();
+        document.getElementById('alertMessage').alert('dispose')
+    };  
+</script>

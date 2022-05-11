@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block topBar %}
+<div class="float-right">
+    <form>
+        <div >
+            <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" id="tagCreateSave" type="submit" action="" method = "POST" value="Save">
+        </div>    
+    </form>
+</div> 
+<div class="float-right">
+    <form action="{% url 'tag-list' %}", method = "GET">
+        <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
+    </form>
+</div>
+<div class="text-center text-xl align-bottom">Tag Create</div>
+{% endblock topBar %}
+{% block main %}
+
+<div id="main">
+    {% include "messages.html" %}
+    <div >
+        
+        <h1>Tag Create </h1>
+        <form class="mt-5 p-5 border border-blue-400" id="createTag" action="{% url 'tag-create' %}" method=POST >
+            {% csrf_token %}
+            {% load widget_tweaks %}
+            
+            <!--start column 1-->
+            <!--start colunm 2-->
+            <div class=" flex-col ">{{data.id}}
+                <label for="id_user" class="italic hidden">User_id:</label>
+                <input id="input_user" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded hidden" type="text" size="20" name="user" value="{{data.user}}"/>
+                <label for="id_description" class="italic ml-3 pt-2">Description:</label>
+                {% render_field form.description class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                
+            </div>
+        </form>
+       
+    
+        
+        
+    </div>    
+</div>    
+
+<script>
+   const save = document.getElementById("tagCreateSave"); 
+   save.addEventListener('click', submitTagCreateSave);
+   
+   function submitTagCreateSave(event){
+        event.preventDefault();
+        document.getElementById("createTag").submit();
+    };
+
+</script>
+
+
+{% endblock main %}

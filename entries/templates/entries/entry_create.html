@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block topBar %}
+<div class="float-right">
+    <form>
+        <div >
+            <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" id="entryCreateSave" type="submit" action="" method = "POST" value="Save">
+        </div>    
+    </form>
+</div> 
+<div class="float-right">
+    <form action="{% url 'media-list' col='list' %}", method = "GET">
+        <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
+    </form>
+</div>
+
+
+<div class="float-right">
+    <div action="", >
+        <input id="allowChangesBtn" class="pt-1 px-2 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center hidden" type="button" value="Allow Changes">
+    </div>
+</div>
+
+{% endblock topBar %}
+{% block sideBar %}
+<form id="taggedCreateForm" class="" action="" method="POST">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+    <div class="">
+        <label for="id_tags" class="">Tags</label>
+        <table>
+            <tbody>
+               
+
+            </tbody>
+        </table>
+        
+    </div>
+</form>
+{% endblock sideBar %}
+{% block main %}
+
+<div class="grid grid-cols-12 gap-1">
+    <div class="p-10 row-start-1 row-end-5 col-start-1 col-end-10 sm:col-end-7 md:col-end-5 lg:col-end-4 xl:col-end-3">
+        <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48">
+    </div>
+    <div class="col-start-1 col-end-13 sm:col-start-7   md:col-start-5  lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">
+      <form class="mt-5 p-5 border border-blue-400" id="editMedia" action="{% url 'media-select' pk=media.id %}" method=POST >
+            {% csrf_token %}
+            <!--start column 1-->
+            <!--start colunm 2-->
+            <div class=" flex-col ">
+                <label for="id_title" class="italic">Title:</label>
+                <input id="input_title" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="title" value="{{media.title}}" readonly/> 
+                <label for="id_author" class="italic">Author:</label>
+                <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{media.author}}" readonly/> 
+                <label for="id_published" class="italic">Published:</label>
+                <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" min="1000" max="2200" value="{{media.published}}" readonly/>
+                <label for="id_subject" class="italic">Subject:</label><br>
+                <input id="input_subject" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="subject" value="{{media.subject}}" readonly/><br>
+                <label for="id_series" class="italic">Series:</label><br>
+                <input id="input_series" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="30" name="series" value="{{media.series}}" readonly/><br>
+                <label for="id_audience" class="italic">Audience:</label><br>
+                <input id="input_audience" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="audience" value="{{media.audience}}" readonly/><br>
+                <label for="id_media_type" class="italic">Type:</label><br>
+                <select id="input_type" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" name="media_type" value="{{media.meida_type}}" readonly>
+                    <option value="TEXT">Text</option>
+                    <option value="VIDEO">Video</option>
+                    <option value="AUDIBLE">Audible</option>
+                </select>
+                
+            </div>
+        </form>
+    </div>
+    <div class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13">
+        <div class="border border-blue-400">
+            <div class="bg-white border border-gray-200">
+                <button
+                    class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
+                    type="button">Publisher info:</button>
+                <div class="px-5">
+                    <label for="id_promoDesc" class="italic"></label>
+                    <textarea id="input_promo_desc" class="not-italic text-base font-semibold" rows="10" cols="40" name="promo_desc" readonly>{{media.promo_desc}}</textarea>
+                </div>
+                    
+                    
+
+            </div>
+
+        </div>
+    </div>
+    <div class="flex flex-wrap bg-green-200 col-start-1 col-end-13">
+        <form id="entrycreateform" class="" action="{% url 'entry-create' med=media.id %}" method="POST">
+            {% csrf_token %}
+            {% load widget_tweaks %}
+            <div class="flex flex-wrap  p-1 h-auto w-full col-start-1 col-end-13 bg-green-200 ">
+                <div class=" bg-green-200">
+                    <label for="input_user" class="italic hidden">User_id:</label>
+                    <input id="input_user" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded hidden" type="text" size="20" name="user" value="{{data.userId}}"/>
+                    <label for="input_media" class="italic hidden">Media_id:</label>
+                    <input id="input_media" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded hidden" type="text" size="20" name="media" value="{{data.mediaId}}"/>
+                    
+                    {% render_field form.status type="radio" class="flex-row  m-1 py-5 "%}
+                </div>
+                <div >
+                    <label for="id_tags" class="italic ml-3 pt-2">Tags:</label>
+                    {% render_field form.tags class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                </div>
+                
+                <div >
+                    <label for="id_date_started" class="italic ml-3 pt-2">Date Started:&nbsp &nbsp </label><span class=" text-sm text-white border bg-blue-500 border-black rounded hover:underline shadow-lg"><a id="eStartClick" onclick="todayFormEntry('eStart')" >today</a></span>
+                    {% render_field form.date_started id="eStart" class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                </div>
+                <div>
+                    <label for="id_source" class="italic ml-3 pt-2">Source:</label>
+                    {% render_field form.source class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                </div>
+                <div>
+                    <label for="id_recommended_by" class="italic ml-3 pt-2">Recommended by:</label>
+                    {% render_field form.recommended_by class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                </div>
+                <div>
+                    <label for="id_date_finished" class="italic ml-3 pt-2">Date Finished:&nbsp &nbsp</label><span class=" text-sm text-white border bg-blue-500 border-black rounded hover:underline shadow-lg"><a id="eFinishClick" onclick="todayFormEntry('eFinish')">today</a></span>
+                    {% render_field form.date_finished id="eFinish" class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                </div>
+                <div>
+                    <label for="id_rating" class="italic ml-3 pt-2">Rating:</label>
+                    {% render_field form.rating class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %} 
+                </div>
+                <div >
+                    <label for="id_my_comment" class="italic ml-3 py-2">My private comment:</label>
+                    {% render_field form.my_comment class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                </div>
+                <div class="">
+                    <label for="id_review" class="italic ml-3 pt-2">Review</label>
+                    {% render_field form.review class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                </div>
+                
+            </div>
+        </form>
+    </div>
+
+</div>    
+
+<script>
+    
+    const deleteC = document.getElementById("confirmDelete"); 
+    const save = document.getElementById("entryCreateSave");
+    const allow = document.getElementById("allowChangesBtn");
+   
+    
+    save.addEventListener('click', submitEntryCreateSave);
+    allow.addEventListener('click', allowChanges);
+    
+
+
+   
+
+    function deleteMediaConfirm(event){
+        event.preventDefault();
+        deleteP.disabled = true;
+        save.disabled = true;   
+        document.getElementById('confirmDelete').style.display = "inline"
+    };
+    
+    function submitEntryCreateSave(event){
+        event.preventDefault();
+        document.getElementById("entrycreateform").submit();
+    };
+
+    function allowChanges(event){
+        document.getElementById("input_title").readOnly = false;
+        document.getElementById("input_author").readOnly = false;
+        document.getElementById("input_published").readOnly = false;
+        document.getElementById("input_subject").readOnly = false;
+        document.getElementById("input_audience").readOnly = false;
+        document.getElementById("input_type").readOnly = false;
+        document.getElementById("input_promo_desc").readOnly = false;
+        document.getElementById("editMediaSave").classList.remove("hidden");
+        document.getElementById("allowChangesBtn").classList.add("hidden")
+
+    }
+
+
+    
+     //for implementing class "collapsible"
+     var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+
+
+    function todayFormEntry(event){
+    var today = new Date()
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = String(today.getFullYear());
+    today = mm + '/' + dd + '/' + yyyy
+    console.log(today)
+
+    if (event === "eStart"){
+        document.getElementById('eStart').value = today;
+    }else if (event === "eFinish"){    
+        document.getElementById('eFinish').value = today;
+    }
+    console.log(document.getElementById('eFinish').value)
+}        
+</script>
+
+
+{% endblock main %}

@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+        {% block sideBar %}
+        <br>
+            <p>Search the text in title, author, and actor columns.</p>
+            <input id="entrySearchInput" type="text" placeholder="Search"/>
+            <br>
+            <p>FILTERS:</p> 
+            <div id="filters">
+                <button id="btn-UserTable" class="btn" data-toggle="collapse" 
+                    data-target="#divchoose-users">> By user(s):</button><br>
+
+                    <div id="divchoose-users" class="collapse in">
+                        <table class="table table-bordered table-sortable" id="choose-users">
+                            <thread>
+                                <tr>
+                                </tr>
+                            </thread>
+                            <tbody id="filterTbodyByUser">
+                                {% for user in users %}
+                                <tr>
+                                    <td class="pl-5">
+                                        <input onclick="searchEntryTbody('ckBox')" id="user-{{user.id}}" name="userFilter" type="checkbox" value="{{ profile.user }}">
+                                        <label for="inputUser">{{ user.name_first }} {{ user.name_last }} {{user.id}}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+            
+            
+                <button id="btn-StatusTable" class="btn" data-toggle="collapse"
+                    data-target="#divchoose-status">> By status(s):</button><br>
+                    
+                    <div id="divchoose-status" class="collapse in">
+                        <table class="table table-bordered table-sortable" id="choose-status">
+                            <thread>
+                                <tr>
+                                </tr>
+                            </thread>
+                            <tbody id="filterTbodyByStatus">
+                                <tr>
+                                    <td class="pl-5">
+                                        <input onclick="searchEntryTbody('ckBox')" id="WISHLIST" name="statusFilter" type="checkbox" value="Wishlist">
+                                        <label for="inputType">Wishlist</label>
+                                    </td>
+                                    <td class="pl-5">
+                                        <input onclick="searchEntryTbody('ckBox')" id="STARTED" name="statusFilter" type="checkbox" value="Started">
+                                        <label for="inputType">Started</label>
+                                    </td>
+                                    <td class="pl-5">
+                                        <input onclick="searchEntryTbody('ckBox')" id="FINISHED" name="statusFilter" type="checkbox" value="Finished">
+                                        <label for="inputType">Finished</label>
+                                    </td>
+                                    <td class="pl-5">
+                                        <input onclick="searchEntryTbody('ckBox')" id="QUIT" name="statusFilter" type="checkbox" value="Quit">
+                                        <label for="inputType">Quit</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div><br>
+                
+                
+            
+            
+                <button id="btn-mediaTypeTable" class="btn" data-toggle="collapse"
+                    data-target="#choose-type">> By media type:</button><br>
+
+                <div id="choose-type" class="collapse in">
+                    <table class="table table-bordered table-sortable" id="mediaTypeTable">
+                        <thread>
+                            <tr>
+                            </tr>
+                        </thread>
+                        <tbody id="filterTbodyByType">
+                            <tr>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="TEXT" name="typeFilter" type="checkbox" value="Text">
+                                    <label for="inputType">Text</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="AUDIBLE" name="typeFilter" type="checkbox" value="Audible">
+                                    <label for="inputType">Audible</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="VIDEO" name="typeFilter" type="checkbox" value="Video">
+                                    <label for="inputType">Video</label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><br>
+            
+            
+                <button id="btn-ratingTable" class="btn" data-toggle="collapse"
+                    data-target="#choose-rating">> By rating(s):</button><br>
+
+                <div id="choose-rating" class="collapse in">
+                    <table class="table table-bordered table-sortable" id="ratingTable">
+                        <thread>
+                            <tr>
+                            </tr>
+                        </thread>
+                        <tbody id="filterTbodyByRating">
+                            <tr>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="0" name="ratingFilter" type="checkbox" value="0">
+                                    <label for="inputType">0</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="1.00" name="ratingFilter" type="checkbox" value="1">
+                                    <label for="inputType">1</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="2.00" name="ratingFilter" type="checkbox" value="2">
+                                    <label for="inputType">2</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="3.00" name="ratingFilter" type="checkbox" value="3">
+                                    <label for="inputType">3</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="3.50" name="ratingFilter" type="checkbox" value="3.5">
+                                    <label for="inputType">3.5</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="4.00" name="ratingFilter" type="checkbox" value="4">
+                                    <label for="inputType">4</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="4.50" name="ratingFilter" type="checkbox" value="4.5">
+                                    <label for="inputType">4.5</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchEntryTbody('ckBox')" id="5.00" name="ratingFilter" type="checkbox" value="5">
+                                    <label for="inputType">5</label>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div><br>
+            </div>       
+
+        {% endblock sideBar%}
+
+        {% block topBar %}
+        <div class="float-right">
+            <form action="{% url 'home' %}", method = "GET">
+                <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
+            </form>
+        </div>
+        <div class=" float-right">
+            <form action="{% url 'media-list' col='list'  %}", method="GET">
+                {% csrf_token %}
+                <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Add New">
+            </form>
+        </div>
+        <div >
+            <p class="text-center text-xl">Media List</p>
+        </div>
+
+        {% endblock topBar%}
+        {% block main %}
+
+        <div id="main" class="inline-block overflow-scroll w-auto px-4 m-4 bg-gray-400">
+            {% include "messages.html" %}
+            
+            <div class="block h-screen" id="entryListTable">
+                <div class=" bg-white ">
+                    <table class="" id="entryTable">
+                        <thead class="bg-blue-100 border border-blue-800 sticky top-0">
+                            <tr class="">                              
+                                <th class="px-4 text-xl text-left"> Title</th>
+                                <th class="px-4 text-xl text-left"> Author</th>
+                                <th class="px-4 text-xl text-left"> Actors</th>
+                                <th class="px-4 text-xl text-left"> Type</th>
+                                <th class="px-4 text-xl text-left"> Status</th>
+                                <th class="px-4 text-xl text-left"> Rating</th>           
+                                <th class="px-4 text-xl text-left"> </th>           
+                            </tr>
+                            <tr class="table-row">
+                                <th class="pl-4 text-left"><a href='{% url "entry-list" col="title" %}' method="GET"</a>Des <span>/</span>   <span><a class="" href='{% url "entry-list" col="-title" %}' method="GET"</a>Asc</span></th>
+                                <th class=""><a href='{% url "entry-list" col="author" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-author" %}' method="GET"</a>Asc</span></th>
+                                <th class=""><a href='{% url "entry-list" col="actors" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-actors" %}' method="GET"</a>Asc</span></th> 
+                                <th class=""><a href='{% url "entry-list" col="media_type" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-media_type" %}' method="GET"</a>Asc</span></th>
+                                <th class=""><a href='{% url "entry-list" col="status" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-status" %}' method="GET"</a>Asc</span></th>      
+                                <th class=""><a href='{% url "entry-list" col="rating" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-rating" %}' method="GET"</a>Asc</span></th>
+                                    <th class=""> </th>                
+                            </tr>
+                        </thead>
+                        <tbody class="" id="entryTbody">
+                            {% for entry in entry %}
+                            <tr class="border border-gray-400" id= "entry- + {{entry.id}}" >
+                                <td class="" style="display:none" id="entryId">{{entry.id}}</td>
+                                <td class="w-3/12 p-2"id="entryTitle">{{entry.media.title}}</td>
+                                <td class="w-2/12" id="entryAuthor">{{entry.media.author}}</td>
+                                <td class="w-3/12" id="entryActors">{{entry.media.actors}}</td>
+                                <td class="w-1/12" id="entryType">{{entry.media.media_type}}</td>
+                                <td class="w-1/12" id="entryType">{{entry.status}}</td>
+                                <td class="w-1/12 mb-2 relative ">
+                                    <div style="width: calc(20% * {{entry.rating}})" class="bg-yellow-300 h-4 top-0 bottom-0 mt-2 z-10 absolute">`</div> 
+                                    <img src="{% static '/images/stars.png' %}"  alt="{{entry.rating}}" title="{{entry.rating}}" class="top-0 bottom-0 mt-2 z-20 w-full absolute">   
+                                </td>
+                            
+                                <td class="w-1/12 pr-4 text-blue-600 ">
+                                <a href={% url 'entry-edit' pk=entry.id %} id="btn-editEntry" class="w-1/12 ml-2 btn btn-default" roll="button">View</a>                  
+                                <td class="invisible" id="entryType">{{entry.user.profile.id}}</td>
+                                <td class="invisible" id="entryType">{{entry.rating}}</td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+</div>    
+
+
+        {% endblock main %}

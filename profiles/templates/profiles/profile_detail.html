@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block topBar %}
+<div class="float-right">
+    <form>
+        <div >
+            <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" id="editProfileSave" type="submit" value="Save">
+        </div>    
+    </form>
+</div> 
+<div class="float-right">
+    <form action="{% url 'profile-list' %}", method = "GET">
+        <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
+    </form>
+</div>
+
+<div class="float-right">
+    <form action=""  id="deleteButtonForm">
+        {% csrf_token %}
+        <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Delete" id="deleteProfileButton">
+    </form>
+</div>
+<div class="float-right">
+    <form action="{% url 'profile-delete' pk=profile.id %}" method = "POST" id="confirmDeleteProfileForm">
+        {% csrf_token %}
+        <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Confirm Delete" id="confirmDelete" style="display: none">  
+    </form>
+</div>
+<div class="text-center text-xl align-bottom">User Edit</div>
+{% endblock topBar %}
+
+
+{% block main %}
+
+<div>
+    {% include "messages.html" %}
+    <div class="flex-row items-center m-5 p-5 bg-green-200">
+        <h1 class="text-lg font-bold">Profile Detail </h1>
+        <form id="profileEditForm" action="", method = "POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+        </form>
+        <br>
+       
+    </div>    
+</div>    
+
+<script>
+    const deleteP = document.getElementById("deleteProfileButton");
+    const deleteC = document.getElementById("confirmDelete"); 
+    const save = document.getElementById("editProfileSave");
+    deleteP.addEventListener('click', deleteProfileConfirm);
+    save.addEventListener('click', submitProfileSave);
+   
+
+    function deleteProfileConfirm(event){
+        event.preventDefault();
+        document.getElementById("deleteProfileButton").classList.add("hidden");
+        document.getElementById("editProfileSave").classList.add("hidden");
+        deleteP.disabled = true;
+        save.disabled = true;   
+        document.getElementById('confirmDelete').style.display = "inline"
+    };
+    
+    function submitProfileSave(event){
+        event.preventDefault();    
+        document.getElementById("profileEditForm").submit();
+    };
+
+</script>
+
+
+{% endblock main %}

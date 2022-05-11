@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% block topBar %}
+<div class="float-right">
+    <form action="{% url 'home' %}", method = "GET">
+        <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
+    </form>
+</div>
+<div class=" float-right">
+    <form action="{% url 'tag-create' %}", method="POST">
+        {% csrf_token %}
+        <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" method="GET" value="Add New">
+    </form>
+</div>
+<div class="text-center text-xl align-bottom">Tag List</div>
+{% endblock topBar %}
+{% block main %}
+<div>
+    {% include "messages.html" %}
+    <div class="flex-row items-center m-5 p-5 bg-green-200">  
+        
+        <h2 class="text-lg font-bold">Tag List</h2>
+        <ul>
+            {% for tag in tag %}
+            <li><a href={% url 'tag-edit' pk=tag.id %}>{{ tag.description }}</a></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
+{% endblock main %}
