@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
         {% block sideBar %}
         <br>
             <p>Search the text in title, author, and actor columns.</p>
@@ -56,11 +57,7 @@
         {% endblock sideBar%}
 
         {% block topBar %}
-        <div class="float-right">
-            <form action="{% url 'home' %}", method = "GET">
-                <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
-            </form>
-        </div>
+        
         <div class=" float-right">
             <form action="{% url 'media-create' %}", method="POST">
                 {% csrf_token %}
@@ -85,7 +82,10 @@
                                 <th class="px-4 text-xl text-left"> Actors</th>
                                 <th class="px-4 text-xl text-left"> Subject</th>
                                 <th class="px-4 text-xl text-left"> Type</th>           
-                                <th class="px-4 text-xl text-left"> </th>           
+                                <th class="px-4 text-xl text-left"> Select</th>
+                                <th class="px-4 text-xl text-left"> </th>
+                                <th class="px-4 text-xl text-left"> Average</th>
+
                             </tr>
                             <tr class="table-row">
                                 <th class="pl-4 text-left"><a href='{% url "media-list" col="title" %}' method="GET"</a>Des <span>/</span>   <span><a class="" href='{% url "media-list" col="-title" %}' method="GET"</a>Asc</span></th>
@@ -93,7 +93,9 @@
                                 <th class=""><a href='{% url "media-list" col="actors" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "media-list" col="-actors" %}' method="GET"</a>Asc</span></th> 
                                 <th class=""><a href='{% url "media-list" col="subject" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "media-list" col="-subject" %}' method="GET"</a>Asc</span></th> 
                                 <th class=""><a href='{% url "media-list" col="media_type" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "media-list" col="-media_type" %}' method="GET"</a>Asc</span></th>
-                                    <th class=""> </th>                
+                                <th class="">to start </th>                
+                                <th class=""></th>                
+                                <th class="">click to view </th>                
                             </tr>
                         </thead>
                         <tbody class="" id="mediaTbody">
@@ -111,9 +113,13 @@
                                 <td class="pr-4 text-blue-600">
                                 <a href={% url 'media-select' pk=media.id %} id="btn-editEntry" class="btn btn-default" roll="button">Select</a>                  
                                 </td>
-                                <td class="pr-4 text-blue-600">
-                                    <a href={% url 'entry-select' med=media.id %} id="btn-editEntry" class="btn btn-default" roll="button">Reviewed</a>                  
-                                    </td>
+                                <td class="invisible" id="mediaAveRating">{{media.ave_rating}}</td>
+                                <td class="w-1/12 mb-2 relative ">
+                                    <div style="width: calc(20% * {{media.ave_rating}})" class="bg-yellow-300 h-4 top-0 bottom-0 mt-2 z-10 absolute">`</div> 
+                                    <a href={% url 'entry-select' med=media.id %} id="btn-editEntry" roll="button">
+                                    <img src="{% static '/images/stars.png' %}"  alt="{{media.ave_rating}}" title="{{media.ave_rating}}" class="top-0 bottom-0 mt-2 z-20 w-full absolute">   
+                                    </a>                  
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

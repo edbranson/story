@@ -16,7 +16,6 @@
 
 <div class="float-right">
     <form action=""  id="deleteButtonForm">
-        {% csrf_token %}
         <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Delete" id="deleteMediaButton">
     </form>
 </div>
@@ -50,19 +49,19 @@
             <!--start column 1-->
             <!--start colunm 2-->
             <div class=" flex-col ">
-                <label for="id_title" class="italic">Title:</label>
+                <label for="title" class="italic">Title:</label>
                 <input id="input_title" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="title" value="{{media.title}}" readonly/> 
-                <label for="id_author" class="italic">Author:</label>
+                <label for="author" class="italic">Author:</label>
                 <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{media.author}}" readonly/> 
-                <label for="id_published" class="italic">Published:</label>
+                <label for="published" class="italic">Published:</label>
                 <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" value="{{media.published}}" placeholder="yyyy" readonly/>
-                <label for="id_subject" class="italic">Subject:</label><br>
+                <label for="subject" class="italic">Subject:</label><br>
                 <input id="input_subject" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="subject" value="{{media.subject}}" readonly/><br>
-                <label for="id_series" class="italic">Series:</label><br>
+                <label for="series" class="italic">Series:</label><br>
                 <input id="input_series" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="30" name="series" value="{{media.series}}" readonly/><br>
-                <label for="id_audience" class="italic">Audience:</label><br>
+                <label for="audience" class="italic">Audience:</label><br>
                 <input id="input_audience" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="audience" value="{{media.audience}}" readonly/><br>
-                <label for="id_media_type" class="italic">Type:</label><br>
+                <label for="media_type" class="italic">Type:</label><br>
                 <select id="input_type" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" name="media_type" value="{{media.meida_type}}" readonly>
                     <option value="TEXT">Text</option>
                     <option value="VIDEO">Video</option>
@@ -79,8 +78,8 @@
                     class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
                     type="button">Publisher info:</button>
                 <div class="px-5">
-                    <label for="id_promoDesc" class="italic"></label>
-                    <textarea id="input_promo_desc" class="not-italic text-base font-semibold" rows="10" cols="40" name="promo_desc" readonly>{{media.promo_desc}}</textarea>
+                    <label for="promo_desc" class="italic"></label>
+                    <textarea  form="editMedia" id="input_promo_desc" class="not-italic text-base font-semibold" rows="10" cols="40" name="promo_desc" readonly>{{media.promo_desc}}</textarea>
                 </div>
                     
                     

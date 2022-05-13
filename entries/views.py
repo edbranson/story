@@ -10,7 +10,7 @@ from django.contrib import messages
 class Home(View):
 
     def get(self, request):
-        return render(request, "home.html")
+        return redirect('media-list', 'list')
 
         
 class EntryCreate(CreateView):
@@ -25,6 +25,9 @@ class EntryCreate(CreateView):
 
     def post(self, request, *args, **kwargs):
         media = get_object_or_404(Media, pk=kwargs['med'])
+        entries_ratings = Entry.objects.filter(media=kwargs['med']).values_list('rating', flat=True)
+        entrieslen = len(entries_ratings)
+        ratingsum = sum(entries_ratings)
         data = {"userId": request.user.id, "mediaId": media.id,}
         form = EntryForm(request.POST, userId=request.user.id)
         context = {'form': form, 'media': media, 'data': data,}
@@ -32,6 +35,7 @@ class EntryCreate(CreateView):
             entry_form_save = form.save(commit=False)
             date_started = entry_form_save.date_started
             date_finished = entry_form_save.date_finished
+            rating = entry_form_save.rating
             status = entry_form_save.status
             if status != "QUIT":
                 if date_finished:
@@ -39,12 +43,22 @@ class EntryCreate(CreateView):
                 elif date_started:
                     entry_form_save.status = "STARTED"
                 else:
-                    entry_form_save.status = "WISHLIST"    
+                    entry_form_save.status = "WISHLIST"
+            if rating == 0:
+                if ratingsum > 0:
+                    media.ave_rating = ratingsum / entrieslen
+                    media.save()
+            else:
+                entrieslen += entrieslen
+                ratingsum = ratingsum + rating
+                media.ave_rating = ratingsum / entrieslen
+                media.save()    
+
             entry_form_save.save()
             form.save_m2m()
            
 
-            return redirect('entry-list', 'list')   
+            return redirect('media-list', 'list')   
         print(form.errors)    
         return render(request, "entries/entry_create.html", context)
 
@@ -71,12 +85,17 @@ class EntryEdit(UpdateView):
 
     def post(self, request, pk): 
         entry = get_object_or_404(Entry, pk=pk)
+        media = get_object_or_404(Media, pk=entry.media_id)
+        entries_ratings = Entry.objects.filter(media=entry.media_id).values_list('rating', flat=True)
+        entrieslen = len(entries_ratings)
+        ratingsum = sum(entries_ratings)
         form = EntryForm(request.POST, instance=entry, userId=request.user.id)
         context = {'form': form, 'entry': entry,}
         if form.is_valid():
             entry_form_save = form.save(commit=False)
             date_started = entry_form_save.date_started
             date_finished = entry_form_save.date_finished
+            rating = entry_form_save.rating
             status = entry_form_save.status
             if status != "QUIT":
                 if date_finished:
@@ -84,15 +103,23 @@ class EntryEdit(UpdateView):
                 elif date_started:
                     entry_form_save.status = "STARTED"
                 else:
-                    entry_form_save.status = "WISHLIST"    
+                    entry_form_save.status = "WISHLIST"
+            if rating == 0:
+                if ratingsum > 0:
+                    media.ave_rating = ratingsum / entrieslen
+                    media.save()
+            else:
+                entrieslen += entrieslen
+                ratingsum = ratingsum + rating
+                media.ave_rating = ratingsum / entrieslen
+                media.save()                        
             entry_form_save.save()
             form.save_m2m()
 
             
             messages.success(request, "Entry was updated successfully!") 
-            return redirect('entry-list', 'list')
-        print(form.errors)
-        print('trying to save')    
+            return redirect('media-list', 'list')
+        print(form.errors)   
         return render(request, 'entries/entry_detail.html', context)  
 
 class EntryDelete(View):
@@ -101,7 +128,7 @@ class EntryDelete(View):
         entry = get_object_or_404(Entry, pk=pk)
         entry.delete()
         messages.success(request, "Entry was deleted!")
-        return redirect('entry-list', 'list') 
+        return redirect('media-list', 'list') 
 
 
 class EntrySelect(View):

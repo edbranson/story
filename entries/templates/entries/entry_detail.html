@@ -9,24 +9,25 @@
     </form>
 </div> 
 <div class="float-right">
-    <form action="{% url 'entry-list' col='list' %}", method = "GET">
+    <form action="{% url 'media-list' col='list' %}", method = "GET">
         <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
     </form>
 </div>
 
 <div class="float-right">
     <form action=""  id="deleteButtonForm">
-        {% csrf_token %}
         <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Delete" id="deleteEntryButton">
     </form>
 </div>
 <div class="float-right">
-    <form {action="% url 'entry-delete' pk=entry.id %}" method = "POST" id="confirmDeleteEntryForm">
+    <form action="{% url 'entry-delete' pk=entry.id %}" method = "POST" id="confirmDeleteEntryForm">
         {% csrf_token %}
         <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Confirm Delete" id="confirmDelete" style="display: none">  
     </form>
 </div>
-
+<div >
+    <p class="text-center text-xl">Entry Detail</p>
+</div>
 {% endblock topBar %}
 {% block main %}
 
@@ -132,31 +133,39 @@
 </div>  
 
 <script>
+    const deleteP = document.getElementById("deleteEntryButton");
+    const deleteC = document.getElementById("confirmDelete"); 
     const save = document.getElementById("editEntrySave");
+    deleteP.addEventListener('click', deleteEntryConfirm);
     save.addEventListener('click', submitEntrySave);
 
-    function submitEntrySave(event){
+    function deleteEntryConfirm(event){
         event.preventDefault();
-        console.log(document.getElementById("input_user").value);
-        console.log(document.getElementById("input_media").value);
+        document.getElementById("deleteEntryButton").classList.add("hidden");
+        document.getElementById("editEntrySave").classList.add("hidden");
+        deleteP.disabled = true;
+        save.disabled = true;   
         
+        document.getElementById('confirmDelete').style.display = "inline"
+    }
+
+    function submitEntrySave(event){
+        event.preventDefault();     
         document.getElementById("entryEditForm").submit();
     };
-
+    
     function todayFormEntry(event){
     var today = new Date()
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
     var yyyy = String(today.getFullYear());
     today = mm + '/' + dd + '/' + yyyy
-    console.log(today)
 
     if (event === "eStart"){
         document.getElementById('eStart').value = today;
     }else if (event === "eFinish"){    
         document.getElementById('eFinish').value = today;
     }
-    console.log(document.getElementById('eFinish').value)
 }            
 
 </script>

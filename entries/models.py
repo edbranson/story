@@ -15,8 +15,8 @@ class Entry(models.Model):
  
     RATING_CHOICES = [(0, 0), (1, 1), (2, 2), (3, 3), (3.5, 3.5), (4, 4), (4.5, 4.5), (5, 5)]
 
-    user = models.ForeignKey(User, on_delete=models.PROTECT, default="")
-    media = models.ForeignKey(Media, on_delete=models.PROTECT, default="")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    media = models.ForeignKey(Media, on_delete=models.CASCADE, default="")
     tags = models.ManyToManyField(Tag)
     source = models.CharField(max_length=25, blank=True)
     rating = models.DecimalField(decimal_places=2, max_digits=3, choices=RATING_CHOICES)

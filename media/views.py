@@ -67,7 +67,6 @@ class MediaSelect(View):
     def post(self, request, pk): 
         media = get_object_or_404(Media, pk=pk)
         form = MediaForm(request.POST, instance=media)
-        print(form.errors)
         context = {'form': form, 'media': media,}
         if form.is_valid():
             form.save()
@@ -75,13 +74,13 @@ class MediaSelect(View):
             return redirect('media-list', 'list')
         messages.error(request, "Validation failed")
         print("form did not validate")    
+        print(form.errors)
         return render(request, 'media/media_select.html', context)  
 
 class MediaDelete(View):
         
     def post(self, request, pk):
         media = get_object_or_404(Media, pk=pk)
-        print('trying to delete')
         media.delete()
         messages.success(request, "Media was deleted!")
         return redirect('media-list', 'list')        

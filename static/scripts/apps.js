@@ -78,7 +78,6 @@ function searchEntryTbody(event) {
     }else{
         var filter = document.getElementById('entrySearchInput').value.toUpperCase(); 
     }
-    console.log(filter)
     var rows = document.querySelector("#entryTbody").rows;
 
     //userFilterTest
@@ -163,8 +162,6 @@ function searchEntryTbody(event) {
         var typeFilterTest = typeChecked.includes(typeInRow);
         var ratingInRow = rows[i].cells[9].textContent;
         var ratingFilterTest = ratingChecked.includes(ratingInRow);            
-        console.log(ratingInRow)
-        console.log(ratingFilterTest)
         if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1
         || thirdCol.indexOf(filter) > -1) {
             if (userFilterTest && typeFilterTest && statusFilterTest && ratingFilterTest){

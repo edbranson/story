@@ -132,10 +132,8 @@ class TagCreate(View):
     def get(self, request):
         form = TagForm()
         data = {"user": request.user,}
-        print(data)
 
         context = {'form': form, 'data': data}
-        print(context)
         return render(request, "profiles/tag_create.html", context)
 
     def post(self, request):
@@ -145,8 +143,7 @@ class TagCreate(View):
         if form.is_valid():
             form.save()
             return redirect('tag-list')
-        print(request.user.id)       
-        print(context)    
+   
         print(form.errors)    
         return render(request, "profiles/tag_create.html", context)    
 

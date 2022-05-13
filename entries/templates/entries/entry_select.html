@@ -178,6 +178,7 @@
                                 <th class="px-4 text-xl text-left"> Status</th>
                                 <th class="px-4 text-xl text-left"> Rating</th>           
                                 <th class="px-4 text-xl text-left"> </th>           
+                                <th class="px-4 text-xl text-left"> </th>           
                             </tr>
                             <tr class="table-row">
                                 <th class="pl-4 text-left"><a href='{% url "entry-list" col="title" %}' method="GET"</a>Des <span>/</span>   <span><a class="" href='{% url "entry-list" col="-title" %}' method="GET"</a>Asc</span></th>
@@ -186,6 +187,7 @@
                                 <th class=""><a href='{% url "entry-list" col="media_type" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-media_type" %}' method="GET"</a>Asc</span></th>
                                 <th class=""><a href='{% url "entry-list" col="status" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-status" %}' method="GET"</a>Asc</span></th>      
                                 <th class=""><a href='{% url "entry-list" col="rating" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-rating" %}' method="GET"</a>Asc</span></th>
+                                    <th class=""> </th>                
                                     <th class=""> </th>                
                             </tr>
                         </thead>
@@ -202,7 +204,7 @@
                                 <td class="pr-4 text-blue-600">
                                 <a href={% url 'entry-edit' pk=entry.id %} id="btn-editEntry" class="w-1/12 btn btn-default" roll="button">View</a>                  
                                 </td>
-                                <td class="" id="entryUser">{{entry.user.profile.id}}</td>
+                                <td class="invisible" id="entryUser">{{entry.user.profile.id}}</td>
 
                             </tr>
                             {% endfor %}
