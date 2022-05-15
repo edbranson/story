@@ -5,12 +5,7 @@
         <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
     </form>
 </div>
-<div class=" float-right">
-    <form action="{% url 'profile-create' %}", method="POST">
-        {% csrf_token %}
-        <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Add New">
-    </form>
-</div>
+
 <div class="text-center text-xl align-bottom">User List</div>
 {% endblock topBar %}
 {% block main %}

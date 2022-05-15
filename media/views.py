@@ -1,7 +1,7 @@
 from django.views import View
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Media
 from entries.models import Entry
 from .forms import MediaForm 
@@ -10,8 +10,8 @@ from django.contrib import messages
 # Create your views here.
 
 
-class MediaCreate(View):
-
+class MediaCreate(LoginRequiredMixin, View):
+    login_url = '/login/'
     def get(self, request):
         form = MediaForm()
         context = {'form': form}
@@ -38,8 +38,8 @@ class MediaList(View):
         context = {'media': media, 'entries': entries,}
         return render(request, "media/media_list.html", context)
 
-class MediaEdit(View):
-    
+class MediaEdit(LoginRequiredMixin, View):
+    login_url = '/login/'
     def get(self, request, pk): 
         media = get_object_or_404(Media, pk=pk)
         form = MediaForm(instance=media)
@@ -56,8 +56,8 @@ class MediaEdit(View):
             return redirect('media-list', 'list')
         return render(request, 'media/media_detailOld.html', context)  
 
-class MediaSelect(View):
-    
+class MediaSelect(LoginRequiredMixin, View):
+    login_url = '/login/'
     def get(self, request, pk): 
         media = get_object_or_404(Media, pk=pk)
         form = MediaForm(instance=media)
@@ -77,7 +77,7 @@ class MediaSelect(View):
         print(form.errors)
         return render(request, 'media/media_select.html', context)  
 
-class MediaDelete(View):
+class MediaDelete(LoginRequiredMixin, View):
         
     def post(self, request, pk):
         media = get_object_or_404(Media, pk=pk)

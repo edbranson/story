@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Media, Entry
 from profiles.models import Tag, Profile
 from .forms import EntryForm
@@ -13,8 +14,8 @@ class Home(View):
         return redirect('media-list', 'list')
 
         
-class EntryCreate(CreateView):
-
+class EntryCreate(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
     def get(self, request, *args, **kwargs):
         media = get_object_or_404(Media, pk=kwargs['med'])
         data = {"userId": request.user.id, "mediaId": media.id,}
@@ -75,8 +76,8 @@ class EntryList(View):
         context = {'entry': entry, 'users': userList}
         return render(request, "entries/entry_list.html", context) 
 
-class EntryEdit(UpdateView):
-    
+class EntryEdit(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
     def get(self, request, pk): 
         entry = get_object_or_404(Entry, pk=pk)
         form = EntryForm(instance=entry, userId=request.user.id)
@@ -122,8 +123,8 @@ class EntryEdit(UpdateView):
         print(form.errors)   
         return render(request, 'entries/entry_detail.html', context)  
 
-class EntryDelete(View):
-        
+class EntryDelete(LoginRequiredMixin, View):
+    login_url = '/login/'   
     def post(self, request, pk):
         entry = get_object_or_404(Entry, pk=pk)
         entry.delete()

@@ -2,6 +2,7 @@ from django.views import View
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Profile, Tag
 from .forms import ProfileForm, TagForm, CustomUserCreationForm 
 from django.contrib import messages
@@ -21,13 +22,14 @@ class RegisterUser(View):
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
+           
             user.save()
-    
+
             messages.success(request, 'User account was created!') 
 
             login(request, user)
-            profileId=Profile.objects.last().id
-            return redirect('profile-edit',profileId)
+            profileId = Profile.objects.last().id
+            return redirect('profile-edit', profileId)
         else:    
             messages.error(request, 'User account Failed?!') 
 
@@ -44,11 +46,6 @@ class LoginUser(View):
     def post(self, request):
         username = request.POST.get('username').lower()
         password = request.POST.get('password')
-
-        try:
-            user = User.objects.get(username=username)
-        except:
-            messages.error(request, 'Username does not exist!') 
 
         user = authenticate(request, username=username, password=password)
 
@@ -83,8 +80,8 @@ class ProfileCreate(View):
             return redirect('profile-list')
         return render(request, "profiles/profile_create.html", context)    
                
-class ProfileList(View):
-
+class ProfileList(LoginRequiredMixin,View):
+    login_url = '/login/'
     def get(self, request):
         profiles = Profile.objects.all()
         context = {'profiles': profiles}
@@ -92,8 +89,8 @@ class ProfileList(View):
 
 
 
-class ProfileEdit(View):
-    
+class ProfileEdit(LoginRequiredMixin,View):
+    login_url = '/login/'
     def get(self, request, pk): 
         profile = get_object_or_404(Profile, pk=pk)
         form = ProfileForm(instance=profile)
@@ -110,8 +107,8 @@ class ProfileEdit(View):
             return redirect('profile-list')
         return render(request, 'profiles/profile_detail.html', context)    
 
-class ProfileDelete(View):
-          
+class ProfileDelete(LoginRequiredMixin,View):
+    login_url = '/login/'      
     def post(self, request, pk):
         profile = get_object_or_404(Profile, pk=pk)
         profile.delete()
@@ -127,8 +124,8 @@ class TagList(View):
         context = {'tag': tag}
         return render(request, "profiles/tag_list.html", context)
 
-class TagCreate(View):
-
+class TagCreate(LoginRequiredMixin,View):
+    login_url = '/login/'
     def get(self, request):
         form = TagForm()
         data = {"user": request.user,}
@@ -147,8 +144,8 @@ class TagCreate(View):
         print(form.errors)    
         return render(request, "profiles/tag_create.html", context)    
 
-class TagEdit(View):
-    
+class TagEdit(LoginRequiredMixin,View):
+    login_url = '/login/'
     def get(self, request, pk): 
         tag = get_object_or_404(Tag, pk=pk)
         form = TagForm(instance=tag)
@@ -166,8 +163,8 @@ class TagEdit(View):
         return render(request, 'profiles/tag_detail.html', context)        
 
 
-class TagDelete(View):
-          
+class TagDelete(LoginRequiredMixin,View):
+    login_url = '/login/'      
     def post(self, request, pk):
         tag = get_object_or_404(Tag, pk=pk)
         tag.delete()

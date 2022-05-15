@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block topBar %}
 <div class="float-right">
     <form>
@@ -16,15 +17,33 @@
 {% endblock topBar %}
 {% block main %}
 
-<div id="main">
+<div class="grid grid-cols-12 gap-1">
     {% include "messages.html" %}
-    <div >
+    <div class="col-start-1 col-end-13 sm:col-start-7   md:col-start-5  lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">
         
         <h1>Profile Create </h1>
-        <form id="createProfile" action="", method = "POST">
+        <form id="createProfile" class="mt-5 p-5 border border-blue-400" action="", method = "POST">
             {% csrf_token %}
-            {{ form.as_p}}
-           
+            <div>
+                <label for="username" class="italic ml-3 pt-2">Username:</label>
+                {% render_field form.username class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+            </div>
+            <div>
+                <label for="name_first" class="italic ml-3 pt-2">First name:</label>
+                {% render_field form.name_first class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+            </div>
+            <div>
+                <label for="last_name" class="italic ml-3 pt-2">Last name:</label>
+                {% render_field form.last_name class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+            </div>
+            <div>
+                <label for="cell_phone" class="italic ml-3 pt-2">Cell phone:</label>
+                {% render_field form.cell_phone class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+            </div>
+            <div>
+                <label for="email" class="italic ml-3 pt-2">Email:</label>
+                {% render_field form.email class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+            </div>  
         </form>
        
     
