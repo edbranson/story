@@ -129,21 +129,21 @@
     <div
       class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13"
     >
-      <div class="">
-        <div class="bg-white ">
+      <div class="border border-blue-400">
+        <div class="bg-white border border-gray-200">
           <button
-            class="collapsible flex items-center w-auto h-auto px-1 text-base text-gray-800 text-left bg-white transition focus:outline-none"
+            class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
             type="button"
           >
             Publisher info:
           </button>
-          <div class="px-3">
+          <div class="px-5">
             <label for="id_promoDesc" class="italic"></label>
             <textarea
               id="input_promo_desc"
-              class="not-italic text-base"
-              rows="15"
-              cols="50"
+              class="not-italic text-base font-semibold"
+              rows="10"
+              cols="40"
               name="promo_desc"
             >
                 {{media.promo_desc}}

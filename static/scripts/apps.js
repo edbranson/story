@@ -45,16 +45,36 @@ function searchMediaTbody(event) {
         }
     }
 
+    //ratingFilterTest
+    var ratingChecked = [];
+    var ratingFilterTest = false
+    var checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]:checked`);
+    for (let i = 0; i < checkBoxRowsRating.length; i++){
+        let rating = checkBoxRowsRating[i].id
+        console.log(rating) 
+        ratingChecked.push(rating);
+    }
+    //selects all checkboxes 
+    if (ratingChecked < 1) {
+        checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]`)
+        for (let i = 0; i < checkBoxRowsRating.length; i++){
+            let rating = checkBoxRowsRating[i].id 
+            ratingChecked.push(rating);
+        }
+    } 
+
     for (var i = 0; i < rows.length; i++) {
         var firstCol = rows[i].cells[1].textContent.toUpperCase();
         var secondCol = rows[i].cells[2].textContent.toUpperCase();
         var thirdCol = rows[i].cells[3].textContent.toUpperCase();
         var typeInRow = rows[i].cells[5].textContent;
-        var typeFilterTest = typeChecked.includes(typeInRow);    
+        var typeFilterTest = typeChecked.includes(typeInRow);
+        var ratingInRow = rows[i].cells[9].textContent;
+        var ratingFilterTest = ratingChecked.includes(ratingInRow);     
 
         if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1
         || thirdCol.indexOf(filter) > -1) {
-            if (typeFilterTest){
+            if (typeFilterTest && ratingFilterTest){
                 rows[i].style.display = "";   
             }else{
                 rows[i].style.display = "none";
@@ -76,9 +96,13 @@ function searchEntryTbody(event) {
             var filter = document.getElementById('entrySearchInput').value.toUpperCase();
         }
     }else{
-        var filter = document.getElementById('entrySearchInput').value.toUpperCase(); 
+        if (document.getElementById('entrySearchInput')){
+            var filter = document.getElementById('entrySearchInput').value.toUpperCase(); 
+        }
     }
-    var rows = document.querySelector("#entryTbody").rows;
+    if (document.querySelector("#entryTbody")){
+        var rows = document.querySelector("#entryTbody").rows;
+    }
 
     //userFilterTest
     var userChecked = [];
@@ -174,6 +198,9 @@ function searchEntryTbody(event) {
         }
     }          
 }   
+
+
+
 
 var vtitle='title'
 

@@ -37,13 +37,47 @@
                 </div><br>
             
             
-                <button id="btn-ratingTable" class="btn" data-toggle="collapse"
-                    data-target="#choose-rating">> By rating(s):</button><br>
+                <button id="btn-ratingTable" class=""
+                    >> By rating(s):</button><br>
 
                 <div id="choose-rating" class="collapse in">
                     <table class="table table-bordered table-sortable" id="ratingTable">
                         <thread>
                             <tr>
+                                <td class="pl-5">
+                                    <input onclick="searchMediaTbody('ckBox')" id="0" name="ratingFilter" type="checkbox" value="0">
+                                    <label for="inputType">0</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchMediaTbody('ckBox')" id="1.00" name="ratingFilter" type="checkbox" value="1">
+                                    <label for="inputType">1</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchMediaTbody('ckBox')" id="2.00" name="ratingFilter" type="checkbox" value="2">
+                                    <label for="inputType">2</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchMediaTbody('ckBox')" id="3.00" name="ratingFilter" type="checkbox" value="3">
+                                    <label for="inputType">3</label>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td class="pl-5">
+                                    <input onclick="searchMediaTbody('ckBox')" id="3.50" name="ratingFilter" type="checkbox" value="3.5">
+                                    <label for="inputType">3.5</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchMediaTbody('ckBox')" id="4.00" name="ratingFilter" type="checkbox" value="4">
+                                    <label for="inputType">4</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchMediaTbody('ckBox')" id="4.50" name="ratingFilter" type="checkbox" value="4.5">
+                                    <label for="inputType">4.5</label>
+                                </td>
+                                <td class="pl-5">
+                                    <input onclick="searchMediaTbody('ckBox')" id="5.00" name="ratingFilter" type="checkbox" value="5">
+                                    <label for="inputType">5</label>
+                                </td>
                             </tr>
                         </thread>
                         <tbody id="filterTbodyByRating">

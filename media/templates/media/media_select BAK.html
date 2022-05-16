@@ -39,13 +39,13 @@
 {% endblock topBar %}
 {% block main %}
 
-<form class="mt-5 p-5" id="editMedia" action="{% url 'media-select' pk=media.id %}" method=POST >
-      {% csrf_token %}
 <div class="grid grid-cols-12 gap-1">
     <div class="p-10 row-start-1 row-end-5 col-start-1 col-end-10 sm:col-end-7 md:col-end-5 lg:col-end-4 xl:col-end-3">
         <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48">
     </div>
     <div class="col-start-1 col-end-13 sm:col-start-7   md:col-start-5  lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">
+      <form class="mt-5 p-5 border border-blue-400" id="editMedia" action="{% url 'media-select' pk=media.id %}" method=POST >
+            {% csrf_token %}
             <!--start column 1-->
             <!--start colunm 2-->
             <div class=" flex-col ">
@@ -71,28 +71,31 @@
                 </select>
                 
             </div>
-        </div>
-        <div class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13">
-            <div class="border border-blue-400">
-                <div class="bg-white border border-gray-200">
-                    <button
+        </form>
+    </div>
+    <div class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13">
+        <div class="border border-blue-400">
+            <div class="bg-white border border-gray-200">
+                <button
                     class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
                     type="button">Publisher info:</button>
-                    <div class="px-5">
-                        <label for="promo_desc" class="italic"></label>
-                        <textarea  id="input_promo_desc" class="not-italic text-base font-semibold" rows="10" cols="40" name="promo_desc" readonly>{{media.promo_desc}}</textarea>
-                    </div>
-                    
-                    
-                    
+                <div class="px-5">
+                    <label for="promo_desc" class="italic"></label>
+                    <textarea  form="editMedia" id="input_promo_desc" class="not-italic text-base font-semibold" rows="10" cols="40" name="promo_desc" readonly>{{media.promo_desc}}</textarea>
                 </div>
-                
+                    
+                    
+
             </div>
-        </div>         
-    </div>    
-</form>
+
+        </div>
+    </div>
     
-    <script>
+   
+
+</div>    
+
+<script>
     const deleteP = document.getElementById("deleteMediaButton");
     const deleteC = document.getElementById("confirmDelete"); 
     const save = document.getElementById("editMediaSave");
