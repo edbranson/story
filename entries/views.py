@@ -50,7 +50,7 @@ class EntryCreate(LoginRequiredMixin, CreateView):
                     media.ave_rating = ratingsum / entrieslen
                     media.save()
             else:
-                entrieslen += entrieslen
+                entrieslen = entrieslen + 1
                 ratingsum = ratingsum + rating
                 media.ave_rating = ratingsum / entrieslen
                 media.save()    
