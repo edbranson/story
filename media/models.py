@@ -21,9 +21,9 @@ class Media(models.Model):
     audience = models.CharField(max_length=30, blank=True)
     promo_img = models.ImageField(blank=True)
     promo_desc = models.TextField(max_length=10000, blank=True)
-    author_link = models.URLField(blank=True, null=True, default="google.com")
+    author_link = models.URLField(blank=True, null=True, default="https://www.google.com")
     created = models.DateTimeField(auto_now_add=True)
-    ave_rating = models.DecimalField(decimal_places=2, max_digits=3, choices=RATING_CHOICES, blank=True, null=True)
+    ave_rating = models.DecimalField(decimal_places=2, max_digits=3, choices=RATING_CHOICES, default=0.00)
     series = models.CharField(max_length=100, blank=True)
     
 

@@ -14,7 +14,8 @@ function getSearchEvent() {
 
 function searchMediaTbody(event) {
     
-    if (event!="typeCk"){
+    var rows = document.querySelector("#mediaTbody").rows;
+    if (event!="ckBox"){
         var mediaSearch = document.getElementById('mediaSearchInput')
         if (mediaSearch.value != "") {
             if (event.target.value == mediaSearch.value){
@@ -26,8 +27,6 @@ function searchMediaTbody(event) {
     }else{
         var filter = document.getElementById('mediaSearchInput').value.toUpperCase(); 
     }
-    console.log(filter)
-    var rows = document.querySelector("#mediaTbody").rows;
 
     //typeFilterTest
     var typeChecked = [];
@@ -50,12 +49,11 @@ function searchMediaTbody(event) {
     var ratingFilterTest = false
     var checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]:checked`);
     for (let i = 0; i < checkBoxRowsRating.length; i++){
-        let rating = checkBoxRowsRating[i].id
-        console.log(rating) 
+        let rating = checkBoxRowsRating[i].id 
         ratingChecked.push(rating);
     }
     //selects all checkboxes 
-    if (ratingChecked < 1) {
+    if (ratingChecked.length < 1) {
         checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]`)
         for (let i = 0; i < checkBoxRowsRating.length; i++){
             let rating = checkBoxRowsRating[i].id 
@@ -87,6 +85,9 @@ function searchMediaTbody(event) {
 
 //called from keyup event to search text in title, author, and actors columns of media table
 function searchEntryTbody(event) {
+    if (document.querySelector("#entryTbody")){
+        var rows = document.querySelector("#entryTbody").rows;
+    }
     if (event!="ckBox"){
         if (document.getElementById('entrySearchInput').value != "") {
             if (event.target.value == document.getElementById('entrySearchInput').value){
@@ -100,9 +101,6 @@ function searchEntryTbody(event) {
             var filter = document.getElementById('entrySearchInput').value.toUpperCase(); 
         }
     }
-    if (document.querySelector("#entryTbody")){
-        var rows = document.querySelector("#entryTbody").rows;
-    }
 
     //userFilterTest
     var userChecked = [];
@@ -111,7 +109,6 @@ function searchEntryTbody(event) {
     for (let i = 0; i < checkBoxRowsUsers.length; i++){
         let user = checkBoxRowsUsers[i].id 
         userChecked.push(user.substring(5));
-        console.log(userChecked)
     }
     //selects all checkboxes 
     if (userChecked < 1) {
@@ -162,11 +159,10 @@ function searchEntryTbody(event) {
     var checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]:checked`);
     for (let i = 0; i < checkBoxRowsRating.length; i++){
         let rating = checkBoxRowsRating[i].id
-        console.log(rating) 
         ratingChecked.push(rating);
     }
     //selects all checkboxes 
-    if (ratingChecked < 1) {
+    if (ratingChecked.length < 1) {
         checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]`)
         for (let i = 0; i < checkBoxRowsRating.length; i++){
             let rating = checkBoxRowsRating[i].id 

@@ -18,6 +18,7 @@ def createProfile(sender, instance, created, **kwargs):
             username=user.username,
             email=user.email,
             name_first=user.first_name,
+            name_last=user.last_name,
         )
 
         subject = 'Welcome to DevSearch'

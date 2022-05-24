@@ -41,7 +41,7 @@
             {% load widget_tweaks %}
             <div>
                 <label for="username" class="italic ml-3 pt-2">Username:</label>
-                {% render_field form.username|attr:"disabled" class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                {% render_field form.username|attr:"readonly" class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
             </div>
             <div>
                 <label for="name_first" class="italic ml-3 pt-2">First name:</label>
