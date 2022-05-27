@@ -47,12 +47,64 @@ class EntryCreate(LoginRequiredMixin, CreateView):
                     entry_form_save.status = "WISHLIST"
             if rating == 0:
                 if ratingsum > 0:
-                    media.ave_rating = ratingsum / entrieslen
+                    ave_rating = ratingsum / entrieslen
+                    if ave_rating <= 1:
+                        media.ave_rating = 1
+                    elif ave_rating > 1 and  ave_rating <= 1.5:   
+                        media.ave_rating = 1
+                    elif ave_rating > 1.5 and  ave_rating <= 2:   
+                        media.ave_rating = 2    
+                    elif ave_rating > 2 and  ave_rating <= 2.5:   
+                        media.ave_rating = 2
+                    elif ave_rating > 2.5 and  ave_rating <= 3:   
+                        media.ave_rating = 3        
+                    elif ave_rating > 3 and  ave_rating <= 3.25:   
+                        media.ave_rating = 3
+                    elif ave_rating > 3.25 and  ave_rating <= 3.5:   
+                        media.ave_rating = 3.5
+                    elif ave_rating > 3.5 and  ave_rating <= 3.75:   
+                        media.ave_rating = 3.5
+                    elif ave_rating > 3.75 and  ave_rating <= 4:   
+                        media.ave_rating = 4
+                    elif ave_rating > 4 and  ave_rating <= 4.25:   
+                        media.ave_rating = 4                
+                    elif ave_rating > 4.25 and  ave_rating <= 4.5:   
+                        media.ave_rating = 4.5
+                    elif ave_rating > 4.5 and  ave_rating <= 4.75:   
+                        media.ave_rating = 4.5
+                    elif ave_rating > 4.75 and  ave_rating <= 5:   
+                        media.ave_rating = 5                       
                     media.save()
             else:
                 entrieslen = entrieslen + 1
                 ratingsum = ratingsum + rating
-                media.ave_rating = ratingsum / entrieslen
+                ave_rating = ratingsum / entrieslen
+                if ave_rating <= 1:
+                        media.ave_rating = 1
+                elif ave_rating > 1 and  ave_rating <= 1.5:   
+                    media.ave_rating = 1
+                elif ave_rating > 1.5 and  ave_rating <= 2:   
+                    media.ave_rating = 2    
+                elif ave_rating > 2 and  ave_rating <= 2.5:   
+                    media.ave_rating = 2
+                elif ave_rating > 2.5 and  ave_rating <= 3:   
+                    media.ave_rating = 3        
+                elif ave_rating > 3 and  ave_rating <= 3.25:   
+                    media.ave_rating = 3
+                elif ave_rating > 3.25 and  ave_rating <= 3.5:   
+                    media.ave_rating = 3.5
+                elif ave_rating > 3.5 and  ave_rating <= 3.75:   
+                    media.ave_rating = 3.5
+                elif ave_rating > 3.75 and  ave_rating <= 4:   
+                    media.ave_rating = 4
+                elif ave_rating > 4 and  ave_rating <= 4.25:   
+                    media.ave_rating = 4                
+                elif ave_rating > 4.25 and  ave_rating <= 4.5:   
+                    media.ave_rating = 4.5
+                elif ave_rating > 4.5 and  ave_rating <= 4.75:   
+                    media.ave_rating = 4.5
+                elif ave_rating > 4.75 and  ave_rating <= 5:   
+                    media.ave_rating = 5                       
                 media.save()    
 
             entry_form_save.save()
@@ -107,12 +159,64 @@ class EntryEdit(LoginRequiredMixin, UpdateView):
                     entry_form_save.status = "WISHLIST"
             if rating == 0:
                 if ratingsum > 0:
-                    media.ave_rating = ratingsum / entrieslen
+                    ave_rating = ratingsum / entrieslen
+                    if ave_rating <= 1:
+                        media.ave_rating = 1
+                elif ave_rating > 1 and  ave_rating <= 1.5:   
+                    media.ave_rating = 1
+                elif ave_rating > 1.5 and  ave_rating <= 2:   
+                    media.ave_rating = 2    
+                elif ave_rating > 2 and  ave_rating <= 2.5:   
+                    media.ave_rating = 2
+                elif ave_rating > 2.5 and  ave_rating <= 3:   
+                    media.ave_rating = 3        
+                elif ave_rating > 3 and  ave_rating <= 3.25:   
+                    media.ave_rating = 3
+                elif ave_rating > 3.25 and  ave_rating <= 3.5:   
+                    media.ave_rating = 3.5
+                elif ave_rating > 3.5 and  ave_rating <= 3.75:   
+                    media.ave_rating = 3.5
+                elif ave_rating > 3.75 and  ave_rating <= 4:   
+                    media.ave_rating = 4
+                elif ave_rating > 4 and  ave_rating <= 4.25:   
+                    media.ave_rating = 4                
+                elif ave_rating > 4.25 and  ave_rating <= 4.5:   
+                    media.ave_rating = 4.5
+                elif ave_rating > 4.5 and  ave_rating <= 4.75:   
+                    media.ave_rating = 4.5
+                elif ave_rating > 4.75 and  ave_rating <= 5:   
+                    media.ave_rating = 5                       
                     media.save()
             else:
                 entrieslen += entrieslen
                 ratingsum = ratingsum + rating
-                media.ave_rating = ratingsum / entrieslen
+                ave_rating = ratingsum / entrieslen
+                if ave_rating <= 1:
+                        media.ave_rating = 1
+                elif ave_rating > 1 and  ave_rating <= 1.5:   
+                    media.ave_rating = 1
+                elif ave_rating > 1.5 and  ave_rating <= 2:   
+                    media.ave_rating = 2    
+                elif ave_rating > 2 and  ave_rating <= 2.5:   
+                    media.ave_rating = 2
+                elif ave_rating > 2.5 and  ave_rating <= 3:   
+                    media.ave_rating = 3        
+                elif ave_rating > 3 and  ave_rating <= 3.25:   
+                    media.ave_rating = 3
+                elif ave_rating > 3.25 and  ave_rating <= 3.5:   
+                    media.ave_rating = 3.5
+                elif ave_rating > 3.5 and  ave_rating <= 3.75:   
+                    media.ave_rating = 3.5
+                elif ave_rating > 3.75 and  ave_rating <= 4:   
+                    media.ave_rating = 4
+                elif ave_rating > 4 and  ave_rating <= 4.25:   
+                    media.ave_rating = 4                
+                elif ave_rating > 4.25 and  ave_rating <= 4.5:   
+                    media.ave_rating = 4.5
+                elif ave_rating > 4.5 and  ave_rating <= 4.75:   
+                    media.ave_rating = 4.5
+                elif ave_rating > 4.75 and  ave_rating <= 5:   
+                    media.ave_rating = 5                       
                 media.save()                        
             entry_form_save.save()
             form.save_m2m()
