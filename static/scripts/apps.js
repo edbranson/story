@@ -9,12 +9,31 @@ function getSearchEvent() {
     if (document.getElementById('mediaSearchInput')) {
         document.getElementById('mediaSearchInput').addEventListener('keyup', searchMediaTbody, false);  
     };
+    if (document.getElementById('btn-UserEntryTable')) {
+        document.getElementById('btn-UserEntryTable').addEventListener('click', myCollapse, false);
+    }
+    if (document.getElementById('btn-StatusEntryTable')) {
+        document.getElementById('btn-StatusEntryTable').addEventListener('click', myCollapse, false);
+    }
+    if (document.getElementById('btn-TypeEntryTable')) {
+        document.getElementById('btn-TypeEntryTable').addEventListener('click', myCollapse, false);
+    }
+    if (document.getElementById('btn-RatingEntryTable')) {
+        document.getElementById('btn-RatingEntryTable').addEventListener('click', myCollapse, false);
+    }
+    if (document.getElementById('btn-TypeMediaTable')) {
+        document.getElementById('btn-TypeMediaTable').addEventListener('click', myCollapse, false);
+    }
+    if (document.getElementById('btn-RatingMediaTable')) {
+        document.getElementById('btn-RatingMediaTable').addEventListener('click', myCollapse, false);
+    }
 }
 
 
 function searchMediaTbody(event) {
     
     var rows = document.querySelector("#mediaTbody").rows;
+    
     if (event!="ckBox"){
         var mediaSearch = document.getElementById('mediaSearchInput')
         if (mediaSearch.value != "") {
@@ -32,9 +51,16 @@ function searchMediaTbody(event) {
     var typeChecked = [];
     var typeFilterTest = false
     var checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]:checked`);
-    for (let i = 0; i < checkBoxRowsType.length; i++){
-        let x = checkBoxRowsType[i].id 
-        typeChecked.push(x);
+    if (event=="clearAll"){
+        for (let i = 0; i < checkBoxRowsType.length; i++){
+            let x = checkBoxRowsType[i] 
+            x.checked = false
+        }
+    }else{
+        for (let i = 0; i < checkBoxRowsType.length; i++){
+            let x = checkBoxRowsType[i].id 
+            typeChecked.push(x);
+        }
     }
     if (typeChecked < 1) {
         checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]`)
@@ -48,10 +74,19 @@ function searchMediaTbody(event) {
     var ratingChecked = [];
     var ratingFilterTest = false
     var checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]:checked`);
-    for (let i = 0; i < checkBoxRowsRating.length; i++){
-        let rating = checkBoxRowsRating[i].id 
-        ratingChecked.push(rating);
+    if (event=="clearAll"){
+        for (let i = 0; i < checkBoxRowsRating.length; i++){
+            let rating = checkBoxRowsRating[i] 
+            rating.checked = false
+        }    
+    }else{
+        for (let i = 0; i < checkBoxRowsRating.length; i++){
+            let rating = checkBoxRowsRating[i].id 
+            ratingChecked.push(rating);
+        }
     }
+    
+
     //selects all checkboxes 
     if (ratingChecked.length < 1) {
         checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]`)
@@ -106,9 +141,16 @@ function searchEntryTbody(event) {
     var userChecked = [];
     var userFilterTest = false
     var checkBoxRowsUsers = document.querySelectorAll(`input[name="userFilter"]:checked`);
-    for (let i = 0; i < checkBoxRowsUsers.length; i++){
-        let user = checkBoxRowsUsers[i].id 
-        userChecked.push(user.substring(5));
+    if (event=="clearAll"){
+        for (let i = 0; i < checkBoxRowsUsers.length; i++){
+            let user = checkBoxRowsUsers[i] 
+            user.checked = false
+        }
+    }else{
+        for (let i = 0; i < checkBoxRowsUsers.length; i++){
+            let user = checkBoxRowsUsers[i].id 
+            userChecked.push(user.substring(5));
+        }
     }
     //selects all checkboxes 
     if (userChecked < 1) {
@@ -123,10 +165,17 @@ function searchEntryTbody(event) {
      var statusChecked = [];
      var statusFilterTest = false
      var checkBoxRowsStatus = document.querySelectorAll(`input[name="statusFilter"]:checked`);
-     for (let i = 0; i < checkBoxRowsStatus.length; i++){
-         let status = checkBoxRowsStatus[i].id 
-         statusChecked.push(status);
-     }
+     if (event=="clearAll"){
+        for (let i = 0; i < checkBoxRowsStatus.length; i++){
+            let x = checkBoxRowsStatus[i] 
+            x.checked = false
+        }
+    }else{
+        for (let i = 0; i < checkBoxRowsStatus.length; i++){
+            let status = checkBoxRowsStatus[i].id 
+            statusChecked.push(status);
+        }
+    }
      //selects all checkboxes 
      if (statusChecked < 1) {
          checkBoxRowsStatus = document.querySelectorAll(`input[name="statusFilter"]`)
@@ -140,10 +189,17 @@ function searchEntryTbody(event) {
      var typeChecked = [];
      var typeFilterTest = false
      var checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]:checked`);
-     for (let i = 0; i < checkBoxRowsType.length; i++){
-         let type = checkBoxRowsType[i].id 
-         typeChecked.push(type);
-     }
+     if (event=="clearAll"){
+        for (let i = 0; i < checkBoxRowsType.length; i++){
+            let x = checkBoxRowsType[i] 
+            x.checked = false
+        }
+    }else{
+        for (let i = 0; i < checkBoxRowsType.length; i++){
+            let x = checkBoxRowsType[i].id 
+            typeChecked.push(x);
+        }
+    }
      //selects all checkboxes 
      if (typeChecked < 1) {
          checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]`)
@@ -157,9 +213,16 @@ function searchEntryTbody(event) {
     var ratingChecked = [];
     var ratingFilterTest = false
     var checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]:checked`);
-    for (let i = 0; i < checkBoxRowsRating.length; i++){
-        let rating = checkBoxRowsRating[i].id
-        ratingChecked.push(rating);
+    if (event=="clearAll"){
+        for (let i = 0; i < checkBoxRowsRating.length; i++){
+            let rating = checkBoxRowsRating[i] 
+            rating.checked = false
+        }    
+    }else{
+        for (let i = 0; i < checkBoxRowsRating.length; i++){
+            let rating = checkBoxRowsRating[i].id 
+            ratingChecked.push(rating);
+        }
     }
     //selects all checkboxes 
     if (ratingChecked.length < 1) {
@@ -196,14 +259,16 @@ function searchEntryTbody(event) {
 }   
 
 
-
-
-var vtitle='title'
-
-function sortTableHeader(col) {
-    if (col === 'title') {
-        vtitle = '-title'
-    }
-
-}
+ //for implementing eventHandler for collapsing filters"
+ 
+function myCollapse(event){
+    var src = event.srcElement; 
+    var content = src.nextElementSibling;
+    if (content.style.display === "block") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "block";
+ }
+ }
+     
 

@@ -35,7 +35,7 @@
         <input id="logEntryUsingBtn" class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Log entry using this Media.">
     </form>
 </div>
-<div class="text-center text-xl align-bottom">Media Select or Edit</div>
+<div class="text-center text-xl align-bottom">Source Select or Edit</div>
 {% endblock topBar %}
 {% block main %}
 
@@ -53,7 +53,8 @@
                 <label for="title" class="italic">Title:</label>
                 <input id="input_title" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="title" value="{{media.title}}" readonly/> 
                 <label for="author" class="italic">Author:</label>
-                <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{media.author}}" readonly/> 
+                <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{media.author}}" readonly/>
+                <input id="input_actors" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="actors" value="{{media.actors}}" readonly/>  
                 <label for="published" class="italic">Published:</label>
                 <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" value="{{media.published}}" placeholder="yyyy" readonly/>
                 <label for="subject" class="italic">Subject:</label><br>
@@ -73,8 +74,8 @@
         <div class="p-3 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13">
             <div class="">
                 <div class="bg-white ">
-                    <button
-                    class="collapsible flex items-center w-auto h-auto px-1 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
+                    <button 
+                    class="collapsible flex items-center w-auto h-auto px-1 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none visible"
                     type="button">Publisher info:</button>
                     <div class="px-3">
                         <label for="promo_desc" class="italic"></label>
@@ -123,6 +124,7 @@
     function allowChanges(event){
         document.getElementById("input_title").readOnly = false;
         document.getElementById("input_author").readOnly = false;
+        document.getElementById("input_actors").readOnly = false;
         document.getElementById("input_published").readOnly = false;
         document.getElementById("input_subject").readOnly = false;
         document.getElementById("input_series").readOnly = false;
@@ -134,21 +136,7 @@
 
     }
 
-     //for implementing class "collapsible"
-     var coll = document.getElementsByClassName("collapsible");
-    var i;
-
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        });
-    }
+    
 
 </script>
 

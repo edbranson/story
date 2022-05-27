@@ -23,7 +23,7 @@
   </form>
 </div>
 
-<div class="text-center text-xl align-bottom">Media Create</div>
+<div class="text-center text-xl align-bottom">Source Create</div>
 
 {% endblock topBar %} {% block main %}
 
@@ -65,6 +65,16 @@
           maxlength="100"
           name="author"
           value="{{media.author}}"
+        />
+        <label for="id_actors" class="italic">Actors:</label>
+        <input
+          id="input_actors"
+          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
+          type="text"
+          size="20"
+          maxlength="100"
+          name="actors"
+          value="{{media.actors}}"
         />
         <label for="id_published" class="italic">Published:</label>
         <input

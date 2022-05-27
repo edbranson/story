@@ -69,8 +69,8 @@ class EntryList(View):
     def get(self, request, col):  
         sortby = col
         entry = Entry.objects.all()
-        if sortby != 'list':
-            entry = media.order_by(sortby)            
+        # if sortby != 'list':
+        #     entry = entry.order_by(sortby)            
         userList = Profile.objects.all()
 
         context = {'entry': entry, 'users': userList}

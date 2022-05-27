@@ -27,9 +27,9 @@ class RegisterUser(View):
 
             messages.success(request, 'User account was created!') 
 
-            login(request, user)
-            profileId = Profile.objects.last().id
-            return redirect('profile-edit', profileId)
+            # login(request, user)
+            # profileId = Profile.objects.last().id
+            # return redirect('profile-edit', profileId)
         else:    
             messages.error(request, 'User account Failed?!') 
 

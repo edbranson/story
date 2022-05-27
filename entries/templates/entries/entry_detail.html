@@ -45,6 +45,8 @@
                 <input id="input_title" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="title" value="{{entry.media.title}}" readonly/> 
                 <label for="id_author" class="italic">Author:</label>
                 <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{entry.media.author}}" readonly/> 
+                <label for="id_actors" class="italic">Actors:</label>
+                <input id="input_actors" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="actors" value="{{entry.media.actors}}" readonly/> 
                 <label for="id_published" class="italic">Published:</label>
                 <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" min="1000" max="2200" value="{{entry.media.published}}" readonly/>
                 <label for="id_subject" class="italic">Subject:</label><br>
@@ -54,7 +56,7 @@
                 <label for="id_audience" class="italic">Audience:</label><br>
                 <input id="input_audience" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="audience" value="{{entry.media.audience}}" readonly/><br>
                 <label for="id_media_type" class="italic">Type:</label><br>
-                <select id="input_type" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" name="media_type" value="{{entry.media.meida_type}}" disabled>
+                <select id="input_type" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" name="media_type" value="{{entry.media.media_type}}" disabled>
                     <option value="TEXT">Text</option>
                     <option value="VIDEO">Video</option>
                     <option value="AUDIBLE">Audible</option>
@@ -66,10 +68,10 @@
     <div class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13">
         <div class="">
             <div class="bg-white">
-                <button
+                <button 
                     class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
                     type="button">Publisher info:</button>
-                <div class="px-5">
+                <div class="px-5 visible">
                     <label for="id_promoDesc" class="italic"></label>
                     <textarea id="input_promo_desc" class="not-italic text-base" rows="15" cols="50" name="promo_desc" readonly>{{entry.media.promo_desc}}</textarea>
                 </div>
@@ -168,5 +170,20 @@
     }
 }            
 
+
+var coll = document.getElementsByClassName("collapsible");
+    
+    
+     for (var i = 0; i < coll.length; i++) {
+         coll[i].addEventListener("click", function () {
+             this.classList.toggle("active");
+             var content = this.nextElementSibling;
+             if (content.style.visibility === "visible") {
+                 content.style.visibiltiy = "hidden";
+             } else {
+                 content.style.display = "visible";
+             }
+         });
+     }
 </script>
 {% endblock main %}
