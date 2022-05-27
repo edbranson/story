@@ -33,6 +33,12 @@ function getSearchEvent() {
 function searchMediaTbody(event) {
     
     var rows = document.querySelector("#mediaTbody").rows;
+    if (event=="clearAll"){
+        console.log("clearAll")
+        var filter = ""
+        document.getElementById('mediaSearchInput').value = filter 
+        document.getElementById('mediaSearchInput').value.refresh
+    }
     
     if (event!="ckBox"){
         var mediaSearch = document.getElementById('mediaSearchInput')
@@ -122,6 +128,12 @@ function searchMediaTbody(event) {
 function searchEntryTbody(event) {
     if (document.querySelector("#entryTbody")){
         var rows = document.querySelector("#entryTbody").rows;
+    }
+    if (event=="clearAll"){
+        console.log("clearAll")
+        var filter = ""
+        document.getElementById('entrySearchInput').value = filter 
+        document.getElementById('entrySearchInput').value.refresh
     }
     if (event!="ckBox"){
         if (document.getElementById('entrySearchInput').value != "") {

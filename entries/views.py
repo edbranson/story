@@ -11,7 +11,7 @@ from django.contrib import messages
 class Home(View):
 
     def get(self, request):
-        return redirect('media-list', 'list')
+        return redirect('entry-list', 'list')
 
         
 class EntryCreate(LoginRequiredMixin, CreateView):
