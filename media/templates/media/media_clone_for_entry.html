@@ -4,7 +4,7 @@
     <div>
       <input
         class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center"
-        id="createMediaSave"
+        id="createMediaEntrySave"
         type="submit"
         action=""
         method="POST"
@@ -14,7 +14,7 @@
   </form>
 </div>
 <div class="float-right">
-  <form action="{% url 'media-list' col='list' %}" , method="GET">
+  <form action="{% url 'entry-list' 'list' %}" , method="GET">
     <input
       class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center"
       type="submit"
@@ -23,17 +23,18 @@
   </form>
 </div>
 
-<div class="text-center text-xl align-bottom">Media Create</div>
+<div class="text-center text-xl align-bottom">Clone Source and change the Format</div>
 
 {% endblock topBar %} {% block main %}
-
+<p>{{clone}}</p>
 <form
   class="mt-5 p-5"
-  id="createMedia"
-  action="{% url 'media-create' %}"
+  id="createMediaEntry"
+  action="{% url 'media-clonefor' pk=clone.id format=clone.media_type %}"
   method="POST"
 >
   {% csrf_token %}
+  {% load widget_tweaks %}
   <div class="grid grid-cols-12 gap-1">
     <div
       class="p-10 row-start-1 row-end-5 col-start-1 col-end-10 sm:col-end-7 md:col-end-5 lg:col-end-4 xl:col-end-3"
@@ -46,7 +47,7 @@
       <!--start column 1-->
       <!--start colunm 2-->
       <div class="flex-col">
-        <label for="id_title" class="italic">Title:</label>
+        <label for="id_title" class="italic">Title: (is read only)</label>
         <input
           id="input_title"
           class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
@@ -54,7 +55,8 @@
           size="20"
           maxlength="100"
           name="title"
-          value="{{media.title}}"
+          value="{{clone.title}}"
+          readonly
         />
         <label for="id_author" class="italic">Author:</label>
         <input
@@ -64,7 +66,17 @@
           size="20"
           maxlength="100"
           name="author"
-          value="{{media.author}}"
+          value="{{clone.author}}"
+        />
+        <label for="id_actors" class="italic">Actors:</label>
+        <input
+          id="input_actors"
+          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
+          type="text"
+          size="20"
+          maxlength="100"
+          name="actors"
+          value="{{clone.actors}}"
         />
         <label for="id_published" class="italic">Published:</label>
         <input
@@ -72,7 +84,7 @@
           class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
           type="number"
           name="published"
-          value="{{media.published}}"
+          value="{{clone.published}}"
           placeholder="yyyy"
         />
         <label for="id_subject" class="italic">Subject:</label><br />
@@ -82,7 +94,7 @@
           type="text"
           size="20"
           name="subject"
-          value="{{media.subject}}"
+          value="{{clone.subject}}"
         /><br />
         <label for="id_series" class="italic">Series:</label><br />
         <input
@@ -91,7 +103,7 @@
           type="text"
           size="30"
           name="series"
-          value="{{media.series}}"
+          value="{{clone.series}}"
         /><br />
         <label for="id_audience" class="italic">Audience:</label><br />
         <input
@@ -100,8 +112,7 @@
           type="text"
           size="20"
           name="audience"
-          value="{{media.audience}}"
-          y
+          value="{{clone.audience}}"
         /><br />
         <label for="id_author_link" class="italic">Author link:</label><br />
         <input
@@ -110,43 +121,53 @@
           type="text"
           size="20"
           name="author_link"
-          value="{{media.author_link}}"
-          y
+          value="{{clone.author_link}}"
         /><br />
-        <label for="id_media_type" class="italic">Type:</label><br />
-        <select
+        <label for="id_media_type" class="italic">Format: (is read only)</label>
+        <input
+        id="input_author_link"
+        class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+        type="text"
+        size="20"
+        name="media_type"
+        value="{{clone.media_type}}"
+        readonly
+      /><br />
+        <!-- <select
           id="input_type"
           class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
           name="media_type"
-          value="{{media.media_type}}"
+          value="{{clone.media_type}}"
+          readonly
         >
-          <option value="TEXT">Text</option>
-          <option value="VIDEO">Video</option>
-          <option value="AUDIBLE">Audible</option></select
+          <option value="TEXT" {% if clone.media_type == "TEXT" %}selected{% endif %}>Text</option>
+          <option value="VIDEO" {% if clone.media_type == "VIDEO" %}selected{% endif %}>Video</option>
+          <option value="AUDIBLE" {% if clone.media_type == "AUDIBLE" %}selected{% endif %}>Audible</option></select
+           -->
         ><br />
       </div>
     </div>
     <div
       class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13"
     >
-      <div class="border border-blue-400">
-        <div class="bg-white border border-gray-200">
+      <div class="">
+        <div class="bg-white ">
           <button
-            class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
+            class="collapsible flex items-center w-auto h-auto px-1 text-base text-gray-800 text-left bg-white transition focus:outline-none"
             type="button"
           >
             Publisher info:
           </button>
-          <div class="px-5">
+          <div class="px-3">
             <label for="id_promoDesc" class="italic"></label>
             <textarea
               id="input_promo_desc"
-              class="not-italic text-base font-semibold"
-              rows="10"
-              cols="40"
+              class="not-italic text-base"
+              rows="15"
+              cols="50"
               name="promo_desc"
             >
-                {{media.promo_desc}}
+                {{clone.promo_desc}}
             </textarea>
           </div>
         </div>
@@ -156,15 +177,15 @@
 </form>
 
 <script>
-  const save = document.getElementById("createMediaSave");
+  const save = document.getElementById("createMediaEntrySave");
 
   const log = document.getElementById("logEntryUsingBtn");
 
-  save.addEventListener("click", submitMediaSave);
+  save.addEventListener("click", submitMediaEntrySave);
 
-  function submitMediaSave(event) {
+  function submitMediaEntrySave(event) {
     event.preventDefault();
-    document.getElementById("createMedia").submit();
+    document.getElementById("createMediaEntry").submit();
   }
 
   //for implementing class "collapsible"

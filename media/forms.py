@@ -21,3 +21,13 @@ class MediaForm(ModelForm):
         widgets = {
             'promo_desc': Textarea,
         }
+
+class MediaSearchForm(ModelForm):
+    TEXT = 'TEXT'
+    VIDEO = 'VIDEO'
+    AUDIBLE = 'AUDIBLE'
+    MEDIA_CHOICES = [(TEXT, 'Text'), (VIDEO, 'Video'), (AUDIBLE, 'Audible')]
+
+    class Meta:
+        model = Media
+        fields = ['title', 'media_type']

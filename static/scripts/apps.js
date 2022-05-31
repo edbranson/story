@@ -9,6 +9,9 @@ function getSearchEvent() {
     if (document.getElementById('mediaSearchInput')) {
         document.getElementById('mediaSearchInput').addEventListener('keyup', searchMediaTbody, false);  
     };
+    // if (document.getElementById('mediaTitleSearchInput')) {
+    //     document.getElementById('mediaTitleSearchInput').addEventListener('keyup', searchTitleMediaTbody, false);  
+    // };
     if (document.getElementById('btn-UserEntryTable')) {
         document.getElementById('btn-UserEntryTable').addEventListener('click', myCollapse, false);
     }
@@ -29,6 +32,9 @@ function getSearchEvent() {
     }
 }
 
+//---------------------------------------------------------------------------------------------
+
+//called from keyup event to search text in title, author, and actors columns of entry table
 
 function searchMediaTbody(event) {
     
@@ -124,6 +130,79 @@ function searchMediaTbody(event) {
     }          
 }   
 
+//-------------------------------------------------------------------------------
+
+//called from keyup event to search text in title column of media table for selecting
+//a media for a new entry
+
+function searchTitleMediaTbody(event) {
+
+    var rows = document.querySelector("#mediaEntryTbody").rows;
+    console.log(rows.length)
+    if (event=="clearAll"){
+        var filter = ""
+        document.getElementById('mediaTitleSearchInput').value = filter 
+        document.getElementById('mediaTitleSearchInput').value.refresh
+    }
+    
+    if (event!="ckBox"){
+        var mediaSearch = document.getElementById('mediaTitleSearchInput')
+        if (mediaSearch.value != "") {
+            if (event.target.value == mediaSearch.value){
+                var filter = mediaSearch.value.toUpperCase();
+            }
+        }else{
+            var filter = mediaSearch.value.toUpperCase();
+        }
+    }else{
+        var filter = document.getElementById('mediaTitleSearchInput').value.toUpperCase(); 
+    }
+
+    //typeFilterTest
+    var typeChecked = [];
+    var typeFilterTest = false
+    var checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]:checked`);
+    if (event=="clearAll"){
+        for (let i = 0; i < checkBoxRowsType.length; i++){
+            let x = checkBoxRowsType[i] 
+            x.checked = false
+        }
+    }else{
+        for (let i = 0; i < checkBoxRowsType.length; i++){
+            let x = checkBoxRowsType[i].id 
+            typeChecked.push(x);
+        }
+    }
+    if (typeChecked < 1) {
+        checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]`)
+        for (let i = 0; i < checkBoxRowsType.length; i++){
+            let x = checkBoxRowsType[i].id 
+            typeChecked.push(x);
+        }
+    }
+
+
+    for (var i = 0; i < rows.length; i++) {
+        var firstCol = rows[i].cells[1].textContent.toUpperCase();
+        var typeInRow = rows[i].cells[5].textContent;
+        var typeFilterTest = typeChecked.includes(typeInRow);
+          
+
+        if (firstCol.indexOf(filter) > -1 ) {
+            if (typeFilterTest ){
+                rows[i].style.display = "";   
+            }else{
+                rows[i].style.display = "none";
+            }
+            
+        } else {
+            rows[i].style.display = "none";
+        }
+    }          
+}   
+
+//---------------------------------------------------------------------------------------------------------------
+
 //called from keyup event to search text in title, author, and actors columns of media table
 function searchEntryTbody(event) {
     if (document.querySelector("#entryTbody")){
@@ -151,8 +230,9 @@ function searchEntryTbody(event) {
 
     //userFilterTest
     var userChecked = [];
-    var userFilterTest = false
+    var userFilterTest = false;
     var checkBoxRowsUsers = document.querySelectorAll(`input[name="userFilter"]:checked`);
+    
     if (event=="clearAll"){
         for (let i = 0; i < checkBoxRowsUsers.length; i++){
             let user = checkBoxRowsUsers[i] 
@@ -172,12 +252,12 @@ function searchEntryTbody(event) {
             userChecked.push(user.substring(5));
         }
     }
-
-     //statusFilterTest
-     var statusChecked = [];
-     var statusFilterTest = false
-     var checkBoxRowsStatus = document.querySelectorAll(`input[name="statusFilter"]:checked`);
-     if (event=="clearAll"){
+    
+    //statusFilterTest
+    var statusChecked = [];
+    var statusFilterTest = false
+    var checkBoxRowsStatus = document.querySelectorAll(`input[name="statusFilter"]:checked`);
+    if (event=="clearAll"){
         for (let i = 0; i < checkBoxRowsStatus.length; i++){
             let x = checkBoxRowsStatus[i] 
             x.checked = false
@@ -188,44 +268,44 @@ function searchEntryTbody(event) {
             statusChecked.push(status);
         }
     }
-     //selects all checkboxes 
-     if (statusChecked < 1) {
-         checkBoxRowsStatus = document.querySelectorAll(`input[name="statusFilter"]`)
+    //selects all checkboxes 
+    if (statusChecked < 1) {
+        checkBoxRowsStatus = document.querySelectorAll(`input[name="statusFilter"]`)
          for (let i = 0; i < checkBoxRowsStatus.length; i++){
              let status = checkBoxRowsStatus[i].id 
              statusChecked.push(status);
-         }
+            }
+        }
+        
+        //typeFilterTest
+        var typeChecked = [];
+        var typeFilterTest = false
+        var checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]:checked`);
+        if (event=="clearAll"){
+            for (let i = 0; i < checkBoxRowsType.length; i++){
+                let x = checkBoxRowsType[i] 
+                x.checked = false
+            }
+        }else{
+            for (let i = 0; i < checkBoxRowsType.length; i++){
+                let x = checkBoxRowsType[i].id 
+                typeChecked.push(x);
+            }
+        }
+        //selects all checkboxes 
+        if (typeChecked < 1) {
+            checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]`)
+            for (let i = 0; i < checkBoxRowsType.length; i++){
+                let type = checkBoxRowsType[i].id 
+                typeChecked.push(type);
+            }
      }
 
-     //typeFilterTest
-     var typeChecked = [];
-     var typeFilterTest = false
-     var checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]:checked`);
+     //ratingFilterTest
+     var ratingChecked = [];
+     var ratingFilterTest = false
+     var checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]:checked`);
      if (event=="clearAll"){
-        for (let i = 0; i < checkBoxRowsType.length; i++){
-            let x = checkBoxRowsType[i] 
-            x.checked = false
-        }
-    }else{
-        for (let i = 0; i < checkBoxRowsType.length; i++){
-            let x = checkBoxRowsType[i].id 
-            typeChecked.push(x);
-        }
-    }
-     //selects all checkboxes 
-     if (typeChecked < 1) {
-         checkBoxRowsType = document.querySelectorAll(`input[name="typeFilter"]`)
-         for (let i = 0; i < checkBoxRowsType.length; i++){
-             let type = checkBoxRowsType[i].id 
-             typeChecked.push(type);
-         }
-     }
-
-    //ratingFilterTest
-    var ratingChecked = [];
-    var ratingFilterTest = false
-    var checkBoxRowsRating = document.querySelectorAll(`input[name="ratingFilter"]:checked`);
-    if (event=="clearAll"){
         for (let i = 0; i < checkBoxRowsRating.length; i++){
             let rating = checkBoxRowsRating[i] 
             rating.checked = false
@@ -269,6 +349,7 @@ function searchEntryTbody(event) {
         }
     }          
 }   
+
 
 
  //for implementing eventHandler for collapsing filters"

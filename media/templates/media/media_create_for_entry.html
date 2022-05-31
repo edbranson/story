@@ -1,21 +1,20 @@
-{% extends 'base.html' %} {% load static %} 
-{% block topBar %}
+{% extends 'base.html' %} {% load static %} {% block topBar %}
 <div class="float-right">
   <form>
     <div>
       <input
         class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center"
-        id="createMediaSave"
+        id="createMediaEntrySave"
         type="submit"
         action=""
         method="POST"
-        value="Save"
+        value="Next"
       />
     </div>
   </form>
 </div>
 <div class="float-right">
-  <form action="{% url 'media-list' col='list' %}" , method="GET">
+  <form action="{% url 'entry-list' 'list' %}" , method="GET">
     <input
       class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center"
       type="submit"
@@ -24,18 +23,18 @@
   </form>
 </div>
 
-<div class="text-center text-xl align-bottom">Create a new Source</div>
+<div class="text-center text-xl align-bottom">Source Create for a New Entry</div>
 
-{% endblock topBar %} 
-{% block main %}
+{% endblock topBar %} {% block main %}
 
 <form
   class="mt-5 p-5"
-  id="createMedia"
-  action="{% url 'media-create' %}"
+  id="createMediaEntry"
+  action="{% url 'media-createfor' %}"
   method="POST"
 >
   {% csrf_token %}
+  {% load widget_tweaks %}
   <div class="grid grid-cols-12 gap-1">
     <div
       class="p-10 row-start-1 row-end-5 col-start-1 col-end-10 sm:col-end-7 md:col-end-5 lg:col-end-4 xl:col-end-3"
@@ -48,7 +47,7 @@
       <!--start column 1-->
       <!--start colunm 2-->
       <div class="flex-col">
-        <label for="id_title" class="italic">Title:</label>
+        <label for="id_title" class="italic">Title: (is read only)</label>
         <input
           id="input_title"
           class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
@@ -56,7 +55,8 @@
           size="20"
           maxlength="100"
           name="title"
-          value="{{media.title}}"
+          value="{{title.title}}"
+          readonlhy
         />
         <label for="id_author" class="italic">Author:</label>
         <input
@@ -125,17 +125,9 @@
           value="{{media.author_link}}"
           y
         /><br />
-        <label for="id_media_type" class="italic">Type:</label><br />
-        <select
-          id="input_type"
-          class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
-          name="media_type"
-          value="{{media.media_type}}"
-        >
-          <option value="TEXT">Text</option>
-          <option value="VIDEO">Video</option>
-          <option value="AUDIBLE">Audible</option></select
-        ><br />
+        <label for="id_media_type" class="italic">Format: (is read only)</label>
+        {% render_field form.media_type type="radio" class="hidden flex-col m-1 py-5 "%}
+        <p>{{type}}</p>
       </div>
     </div>
     <div
@@ -168,15 +160,15 @@
 </form>
 
 <script>
-  const save = document.getElementById("createMediaSave");
+  const save = document.getElementById("createMediaEntrySave");
 
   const log = document.getElementById("logEntryUsingBtn");
 
-  save.addEventListener("click", submitMediaSave);
+  save.addEventListener("click", submitMediaEntrySave);
 
-  function submitMediaSave(event) {
+  function submitMediaEntrySave(event) {
     event.preventDefault();
-    document.getElementById("createMedia").submit();
+    document.getElementById("createMediaEntry").submit();
   }
 
   //for implementing class "collapsible"

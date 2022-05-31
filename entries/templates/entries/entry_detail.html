@@ -9,7 +9,7 @@
     </form>
 </div> 
 <div class="float-right">
-    <form action="{% url 'media-list' col='list' %}", method = "GET">
+    <form action="{% url 'entry-list' col='list' %}", method = "GET">
         <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
     </form>
 </div>
@@ -41,27 +41,22 @@
             <!--start column 1-->
             <!--start colunm 2-->
             <div class=" flex-col ">
-                <label for="id_title" class="italic">Title:</label>
+                <label for="id_title" class="italic">Title: (is read only)</label>
                 <input id="input_title" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="title" value="{{entry.media.title}}" readonly/> 
-                <label for="id_author" class="italic">Author:</label>
+                <label for="id_author" class="italic">Author: (is read only)</label>
                 <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{entry.media.author}}" readonly/> 
-                <label for="id_actors" class="italic">Actors:</label>
+                <label for="id_actors" class="italic">Actors: (is read only)</label>
                 <input id="input_actors" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="actors" value="{{entry.media.actors}}" readonly/> 
-                <label for="id_published" class="italic">Published:</label>
+                <label for="id_published" class="italic">Published: (is read only)</label>
                 <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" min="1000" max="2200" value="{{entry.media.published}}" readonly/>
-                <label for="id_subject" class="italic">Subject:</label><br>
+                <label for="id_subject" class="italic">Subject: (is read only)</label><br>
                 <input id="input_subject" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="subject" value="{{entry.media.subject}}" readonly/><br>
-                <label for="id_series" class="italic">Series:</label><br>
+                <label for="id_series" class="italic">Series: (is read only)</label><br>
                 <input id="input_series" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="30" name="series" value="{{entry.media.series}}" readonly/><br>
-                <label for="id_audience" class="italic">Audience:</label><br>
+                <label for="id_audience" class="italic">Audience: (is read only)</label><br>
                 <input id="input_audience" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="audience" value="{{entry.media.audience}}" readonly/><br>
-                <label for="id_media_type" class="italic">Type:</label><br>
-                <select id="input_type" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" name="media_type" value="{{entry.media.media_type}}" disabled>
-                    <option value="TEXT">Text</option>
-                    <option value="VIDEO">Video</option>
-                    <option value="AUDIBLE">Audible</option>
-                </select>
-                
+                <label for="id_media_type" class="italic">Type: (is read only)</label><br>
+                <p>{{entry.media.media_type}}</p>           
             </div>
         </form>
     </div>
@@ -70,7 +65,7 @@
             <div class="bg-white">
                 <button 
                     class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
-                    type="button">Publisher info:</button>
+                    type="button">Publisher info: (is read only)</button>
                 <div class="px-5 visible">
                     <label for="id_promoDesc" class="italic"></label>
                     <textarea id="input_promo_desc" class="not-italic text-base" rows="15" cols="50" name="promo_desc" readonly>{{entry.media.promo_desc}}</textarea>

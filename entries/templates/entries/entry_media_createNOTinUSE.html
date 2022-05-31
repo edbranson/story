@@ -10,7 +10,7 @@
     </form>
 </div> 
 <div class="float-right">
-    <form action="{% url 'entry-list' col='list' %}", method = "GET">
+    <form action="{% url 'home' %}", method = "GET">
         <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
     </form>
 </div>
@@ -21,7 +21,7 @@
         <input id="allowChangesBtn" class="pt-1 px-2 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center hidden" type="button" value="Allow Changes">
     </div>
 </div>
-<div class="text-center text-xl align-bottom">Create a New Entry</div>
+
 {% endblock topBar %}
 {% block sideBar %}
 <form id="taggedCreateForm" class="" action="" method="POST">
@@ -46,39 +46,47 @@
         <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48">
     </div>
     <div class="col-start-1 col-end-13 sm:col-start-7   md:col-start-5  lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">
-      <form class="mt-5 p-5 border border-blue-400" id="editMedia" action="{% url 'media-select' pk=media.id %}" method=POST >
+      <form class="mt-5 p-5 border border-blue-400" id="editMedia" action="{% url 'entrymedia-create' %}" method=POST >
             {% csrf_token %}
+            {% load widget_tweaks %}
             <!--start column 1-->
             <!--start colunm 2-->
             <div class=" flex-col ">
-                <label for="id_title" class="italic">Title: (is read only)</label>
-                <input id="input_title" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="title" value="{{media.title}}" readonly/> 
-                <label for="id_author" class="italic">Author: (is read only)</label>
-                <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{media.author}}" readonly/>
-                <label for="id_actors" class="italic">Actors: (is read only)</label>
-                <input id="input_actors" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="actors" value="{{media.actors}}" readonly/>  
-                <label for="id_published" class="italic">Published: (is read only)</label>
-                <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" min="1000" max="2200" value="{{media.published}}" readonly/>
-                <label for="id_subject" class="italic">Subject: (is read only)</label><br>
-                <input id="input_subject" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="subject" value="{{media.subject}}" readonly/><br>
-                <label for="id_series" class="italic">Series: (is read only)</label><br>
-                <input id="input_series" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="30" name="series" value="{{media.series}}" readonly/><br>
-                <label for="id_audience" class="italic">Audience: (is read only)</label><br>
-                <input id="input_audience" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="audience" value="{{media.audience}}" readonly/><br>
-                <label for="id_media_type" class="italic">Format: (is read only)</label>
-                <p>{{media.media_type}}</p>    
+                <label for="id_title" class="italic">Title:</label>
+                {% render_field form1.title class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" value="Should be Title"%}
+                <label for="id_author" class="italic">Author:</label>
+                <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{media.author}}" />
+                <label for="id_actors" class="italic">Actors:</label>
+                <input id="input_actors" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="actors" value="{{form1.media.actors}}" />  
+                <label for="id_published" class="italic">Published:</label>
+                <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" min="1000" max="2200" value="{{form1.media.published}}" />
+                <label for="id_subject" class="italic">Subject:</label><br>
+                <input id="input_subject" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="subject" value="{{form1.media.subject}}"/><br>
+                <label for="id_series" class="italic">Series:</label><br>
+                <input id="input_series" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="30" name="series" value="{{form1.media.series}}"/><br>
+                <label for="id_audience" class="italic">Audience:</label><br>
+                <input id="input_audience" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="audience" value="{{form1.media.audience}}"/><br>
+                <label for="id_media_type" class="italic">Type:</label><br>
+                <select id="input_type" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" name="media_type" value="{{form1.media.media_type}}" >
+                    <option value="TEXT">Text</option>
+                    <option value="VIDEO">Video</option>
+                    <option value="AUDIBLE">Audible</option>
+                </select>
+                
             </div>
         </form>
+        <p>placed holder</p>
+        <p>{{form1.title}}</p>
     </div>
     <div class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13">
         <div class="border border-blue-400">
             <div class="bg-white border border-gray-200">
                 <button
                     class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
-                    type="button">Publisher info: (is read only)</button>
+                    type="button">Publisher info:</button>
                 <div class="px-5">
                     <label for="id_promoDesc" class="italic"></label>
-                    <textarea id="input_promo_desc" class="not-italic text-base font-semibold" rows="10" cols="40" name="promo_desc" readonly>{{media.promo_desc}}</textarea>
+                    <textarea id="input_promo_desc" class="not-italic text-base font-semibold" rows="10" cols="40" name="promo_desc" >{{form1.media.promo_desc}}</textarea>
                 </div>
                     
                     
@@ -88,7 +96,7 @@
         </div>
     </div>
     <div class="flex flex-wrap bg-green-200 col-start-1 col-end-13">
-        <form id="entrycreateform" class="" action="{% url 'entry-create' med=media.id %}" method="POST">
+        <form id="entrycreateform" class="" action="{% url 'entrymedia-create' %}" method="POST">
             {% csrf_token %}
             {% load widget_tweaks %}
             <div class="flex flex-wrap  p-1 h-auto w-full col-start-1 col-end-13 bg-green-200 ">
@@ -98,40 +106,40 @@
                     <label for="input_media" class="italic hidden">Media_id:</label>
                     <input id="input_media" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded hidden" type="text" size="20" name="media" value="{{data.mediaId}}"/>
                     
-                    {% render_field form.status type="radio" class="flex-row  m-1 py-5 "%}
+                    {% render_field form2.status type="radio" class="flex-row  m-1 py-5 "%}
                 </div>
                 <div >
                     <label for="id_tags" class="italic ml-3 pt-2">Tags:</label>
-                    {% render_field form.tags class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                    {% render_field form2.tags class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
                 </div>
                 
                 <div >
                     <label for="id_date_started" class="italic ml-3 pt-2">Date Started:&nbsp &nbsp </label><span class=" text-sm text-white border bg-blue-500 border-black rounded hover:underline shadow-lg"><a id="eStartClick" onclick="todayFormEntry('eStart')" >today</a></span>
-                    {% render_field form.date_started id="eStart" class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                    {% render_field form2.date_started id="eStart" class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
                 </div>
                 <div>
                     <label for="id_source" class="italic ml-3 pt-2">Source:</label>
-                    {% render_field form.source class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                    {% render_field form2.source class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
                 </div>
                 <div>
                     <label for="id_recommended_by" class="italic ml-3 pt-2">Recommended by:</label>
-                    {% render_field form.recommended_by class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                    {% render_field form2.recommended_by class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
                 </div>
                 <div>
                     <label for="id_date_finished" class="italic ml-3 pt-2">Date Finished:&nbsp &nbsp</label><span class=" text-sm text-white border bg-blue-500 border-black rounded hover:underline shadow-lg"><a id="eFinishClick" onclick="todayFormEntry('eFinish')">today</a></span>
-                    {% render_field form.date_finished id="eFinish" class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                    {% render_field form2.date_finished id="eFinish" class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
                 </div>
                 <div>
                     <label for="id_rating" class="italic ml-3 pt-2">Rating:</label>
-                    {% render_field form.rating class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %} 
+                    {% render_field form2.rating class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %} 
                 </div>
                 <div >
                     <label for="id_my_comment" class="italic ml-3 py-2">My private comment:</label>
-                    {% render_field form.my_comment class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                    {% render_field form2.my_comment class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
                 </div>
                 <div class="">
                     <label for="id_review" class="italic ml-3 pt-2">Review</label>
-                    {% render_field form.review class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                    {% render_field form2.review class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
                 </div>
                 
             </div>

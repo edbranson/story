@@ -7,8 +7,6 @@ from django.forms import ModelForm, Textarea
 
 
 
-
-
 class EntryForm(ModelForm):
     FINISHED = 'FINISHED'
     STARTED = 'STARTED'

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+        {% block sideBar %}
+         
+
+        {% endblock sideBar%}
+
+        {% block topBar %}
+        
+        <div class=" float-right">
+            <form action="{% url 'home' %}", method="GET">
+                <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
+            </form>
+        </div>
+        <div class=" float-right">
+        <form action="{% url 'media-createfor' %}", method="GET"">
+                <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Add New">
+            </form>
+        </div>
+    
+        
+        {% endblock topBar%}
+        {% block main %}
+
+        <div id="main" class="inline-block w-auto px-4 m-4 bg-gray-400">
+            {% include "messages.html" %}
+            <div class="" id="mediaEntryListTable">
+                <div class=" bg-white ">
+                    <div class="bg-green-100">
+                        <p>Title entered.</p>
+                        <input type="text" value={{title}} readonly/><br>
+                        <p>Format chosen:</p>
+                        <input type="text" value={{type}} readonly/><br>
+                    </div>
+                    <table class="" id="mediaTable">
+                        <thead class="bg-blue-100 border border-blue-800 sticky top-0">
+                            <tr>
+                                <td></td>
+                                <td class="text-xl font-semibold">Chose for new Entry</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="">                              
+                                <th class="px-4 text-xl text-left"> Title</th>
+                                <th class="px-4 text-xl text-left"> Author</th>
+                                <th class="px-4 text-xl text-left"> Actors</th>
+                                <th class="px-4 text-xl text-left"> Subject</th>
+                                <th class="px-4 text-xl text-left"> Format</th>           
+                                <th class="px-4 text-xl text-left"> Select</th>
+                                <th class="px-4 text-xl text-left"> </th>
+                               
+
+                            </tr>
+                            
+                        </thead>
+                        <tbody  class="" id="mediaEntryTbody">
+                            {% for media in source %}
+                            <tr class="border border-gray-400" id= "media- + {{media.id}}" >
+                                <td class="" style="display:none" id="mediaId">{{media.id}}</td>
+                                <td class=" p-2"id="mediaTitle">{{media.title}}</td>
+                                <td class="" id="mediaAuthor">{{media.author}}</td>
+                                <td class="" id="mediaActors">{{media.actors}}</td>
+                                <td class="" id="mediaSubject">{{media.subject}}</td>
+                                {% if type == media.media_type %}
+                                <td class="" id="mediaType">{{media.media_type}}</td>
+                                {% else %}
+                                <td class="text-red-600" id="mediaType">{{media.media_type}}</td>
+                                {% endif %}
+                                <td class="" style="display:none" id="mediaReader">{{media.reader}}</td>
+                                <td class="" style="display:none" id="mediaAudience">{{media.audience}}</td>
+                                <dtdclass="table-cell" style="display:none" id="mediaPromodesc">{{media.promo_desc}}</td>
+                                {% if type == media.media_type %}
+                                <td class="pr-4 text-blue-600">
+                                    <a href={% url 'entry-create' med=media.id %} id="" class="" roll="button">Select</a>
+                                </td>
+                                {% else %}
+                                <td class="pr-4 text-blue-600">
+                                    <a href={% url 'media-clonefor' pk=media.id format=type %}  id="" class="" roll="button">Clone for {{type}} format</a>
+                                
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+</div>    
+
+
+        {% endblock main %}
