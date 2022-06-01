@@ -340,7 +340,7 @@ class EntryEdit(LoginRequiredMixin, UpdateView):
 
             
             messages.success(request, "Entry was updated successfully!") 
-            return redirect('media-list', 'list')
+            return redirect('home')
         print(form.errors)   
         return render(request, 'entries/entry_detail.html', context)  
 

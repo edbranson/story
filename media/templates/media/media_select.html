@@ -54,6 +54,9 @@
                 <input id="input_title" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="title" value="{{media.title}}" readonly/> 
                 <label for="author" class="italic">Author:</label>
                 <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{media.author}}" readonly/>
+                <label for="author" class="italic">Reader:</label>
+                <input id="input_reader" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="reader" value="{{media.actors}}" readonly/>  
+                <label for="author" class="italic">Actors:</label>
                 <input id="input_actors" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="actors" value="{{media.actors}}" readonly/>  
                 <label for="published" class="italic">Published:</label>
                 <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" value="{{media.published}}" placeholder="yyyy" readonly/>
@@ -125,6 +128,7 @@
         document.getElementById("input_title").readOnly = false;
         document.getElementById("input_author").readOnly = false;
         document.getElementById("input_actors").readOnly = false;
+        document.getElementById("input_reader").readOnly = false;
         document.getElementById("input_published").readOnly = false;
         document.getElementById("input_subject").readOnly = false;
         document.getElementById("input_series").readOnly = false;
