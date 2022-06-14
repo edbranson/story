@@ -41,54 +41,7 @@
 {% endblock sideBar %}
 {% block main %}
 
-<div class="grid grid-cols-12 gap-1">
-    <div class="p-10 row-start-1 row-end-5 col-start-1 col-end-10 sm:col-end-7 md:col-end-5 lg:col-end-4 xl:col-end-3">
-        <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48">
-    </div>
-    <div class="col-start-1 col-end-13 sm:col-start-7   md:col-start-5  lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">
-      <form class="mt-5 p-5 border border-blue-400" id="editMedia" action="{% url 'media-select' pk=media.id %}" method=POST >
-            {% csrf_token %}
-            <!--start column 1-->
-            <!--start colunm 2-->
-            <div class=" flex-col ">
-                <label for="id_title" class="italic">Title: (is read only)</label>
-                <input id="input_title" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="title" value="{{media.title}}" readonly/> 
-                <label for="id_author" class="italic">Author: (is read only)</label>
-                <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{media.author}}" readonly/>
-                <label for="id_reader" class="italic">Reader: (is read only)</label>
-                <input id="input_reader" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="reader" value="{{media.reader}}" readonly/>
-                <label for="id_actors" class="italic">Actors: (is read only)</label>
-                <input id="input_actors" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="actors" value="{{media.actors}}" readonly/>  
-                <label for="id_published" class="italic">Published: (is read only)</label>
-                <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" min="1000" max="2200" value="{{media.published}}" readonly/>
-                <label for="id_subject" class="italic">Subject: (is read only)</label><br>
-                <input id="input_subject" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="subject" value="{{media.subject}}" readonly/><br>
-                <label for="id_series" class="italic">Series: (is read only)</label><br>
-                <input id="input_series" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="30" name="series" value="{{media.series}}" readonly/><br>
-                <label for="id_audience" class="italic">Audience: (is read only)</label><br>
-                <input id="input_audience" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="audience" value="{{media.audience}}" readonly/><br>
-                <label for="id_media_type" class="italic">Format: (is read only)</label>
-                <p>{{media.media_type}}</p>    
-            </div>
-        </form>
-    </div>
-    <div class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13">
-        <div class="border border-blue-400">
-            <div class="bg-white border border-gray-200">
-                <button
-                    class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
-                    type="button">Publisher info: (is read only)</button>
-                <div class="px-5">
-                    <label for="id_promoDesc" class="italic"></label>
-                    <textarea id="input_promo_desc" class="not-italic text-base font-semibold" rows="10" cols="40" name="promo_desc" readonly>{{media.promo_desc}}</textarea>
-                </div>
-                    
-                    
-
-            </div>
-
-        </div>
-    </div>
+<div class="grid grid-cols-12 gap-1 mt-4 mx-3">
     <div class="flex flex-wrap bg-green-200 col-start-1 col-end-13">
         <form id="entrycreateform" class="" action="{% url 'entry-create' med=media.id %}" method="POST">
             {% csrf_token %}
@@ -138,6 +91,53 @@
                 
             </div>
         </form>
+    </div>
+    <div class="p-10 row-start-11 row-end-15 col-start-1 col-end-10 sm:col-end-7 md:col-end-5 lg:col-end-4 xl:col-end-3">
+        <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48">
+    </div>
+    <div class="col-start-1 col-end-13 sm:col-start-7   md:col-start-5  lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">
+      <form class="mt-5 p-5 border border-blue-400" id="editMedia" action="{% url 'media-select' pk=media.id %}" method=POST >
+            {% csrf_token %}
+            <!--start column 1-->
+            <!--start colunm 2-->
+            <div class=" flex-col ">
+                <label for="id_title" class="italic">Title: (is read only)</label>
+                <input id="input_title" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="title" value="{{media.title}}" readonly/> 
+                <label for="id_author" class="italic">Author: (is read only)</label>
+                <input id="input_author" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="author" value="{{media.author}}" readonly/>
+                <label for="id_reader" class="italic">Reader: (is read only)</label>
+                <input id="input_reader" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="reader" value="{{media.reader}}" readonly/>
+                <label for="id_actors" class="italic">Actors: (is read only)</label>
+                <input id="input_actors" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="text" size="20" maxlength="100" name="actors" value="{{media.actors}}" readonly/>  
+                <label for="id_published" class="italic">Published: (is read only)</label>
+                <input id="input_published" class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded" type="number"  name="published" min="1000" max="2200" value="{{media.published}}" readonly/>
+                <label for="id_subject" class="italic">Subject: (is read only)</label><br>
+                <input id="input_subject" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="subject" value="{{media.subject}}" readonly/><br>
+                <label for="id_series" class="italic">Series: (is read only)</label><br>
+                <input id="input_series" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="30" name="series" value="{{media.series}}" readonly/><br>
+                <label for="id_audience" class="italic">Audience: (is read only)</label><br>
+                <input id="input_audience" class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" type="text" size="20" name="audience" value="{{media.audience}}" readonly/><br>
+                <label for="id_media_type" class="italic">Format: (is read only)</label>
+                <p>{{media.media_type}}</p>    
+            </div>
+        </form>
+    </div>
+    <div class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13">
+        <div class="border border-blue-400">
+            <div class="bg-white border border-gray-200">
+                <button
+                    class="collapsible flex items-center w-auto h-auto px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
+                    type="button">Publisher info: (is read only)</button>
+                <div class="px-5">
+                    <label for="id_promoDesc" class="italic"></label>
+                    <textarea id="input_promo_desc" class="not-italic text-base font-semibold" rows="10" cols="40" name="promo_desc" readonly>{{media.promo_desc}}</textarea>
+                </div>
+                    
+                    
+
+            </div>
+
+        </div>
     </div>
 
 </div>    
