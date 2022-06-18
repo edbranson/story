@@ -164,8 +164,8 @@
 
         <div id="main" class="inline-block overflow-scroll w-auto px-4 m-4 bg-gray-400">
             {% include "messages.html" %}
-            
-            <div class="block h-screen" id="entryListTable">
+            <div id="loader"></div>
+            <div class=" loader block h-screen animate-bottom" id="entryListTable">
                 <div class=" bg-white ">
                     <table class="" id="entryTable">
                         <thead class="bg-green-100 border border-blue-800 sticky top-0">
@@ -191,17 +191,7 @@
                                 <th></th>          
                                 <th></th>          
                             </tr>
-                            <!-- <tr class="table-row">
-                                <th class="pl-4 text-left"><a href='{% url "entry-list" col="title" %}' method="GET"</a>Des <span>/</span>   <span><a class="" href='{% url "entry-list" col="-title" %}' method="GET"</a>Asc</span></th>
-                                <th class=""><a href='{% url "entry-list" col="author" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-author" %}' method="GET"</a>Asc</span></th>
-                                <th class=""><a href='{% url "entry-list" col="actors" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-actors" %}' method="GET"</a>Asc</span></th> 
-                                <th class=""><a href='{% url "entry-list" col="media_type" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-media_type" %}' method="GET"</a>Asc</span></th>
-                                <th class=""><a href='{% url "entry-list" col="status" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-status" %}' method="GET"</a>Asc</span></th>      
-                                <th class=""><a href='{% url "entry-list" col="rating" %}' method="GET"</a>Des<span>/</span>     <span><a href='{% url "entry-list" col="-rating" %}' method="GET"</a>Asc</span></th>
-                                <th class=""> </th>                
-                                <th class=""> </th>                
-                                <th class=""> </th>                
-                            </tr> -->
+                            
                         </thead>
                         <tbody class="" id="entryTbody">
                             {% for entry in entry %}
@@ -229,6 +219,8 @@
                 </div>
             </div>
 </div> 
-
+<script tuype="text/javascript">
+    myFunction()
+</script>
 
         {% endblock main %}

@@ -47,3 +47,17 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 }
+
+//for implementing loading spinner
+
+
+function myFunction() { 
+  var myVar; 
+  myVar = setTimeout(showPage, 1500);
+  console.log('we are at myFunction')
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  // document.getElementById("mySideRight").style.display = "block";
+}

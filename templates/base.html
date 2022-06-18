@@ -13,6 +13,7 @@
    
     
     <link rel="stylesheet" type="text/css" href="/static/styles/output.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/main.css">
     
     <script src="/static/scripts/main.js"></script>
     <script src="/static/scripts/apps.js"></script>
@@ -88,20 +89,24 @@
         </div>
     </div>   
     
+
     <div id="mySideRight" class="col-start-3 col-end-9">
-
-
-<!--end of top Nav Bar-->
-<!--beginning of main Screen--> 
-    {% block main %}
         
-    {% endblock main %} 
+        
+        <!--end of top Nav Bar-->
+        <!--beginning of main Screen--> 
+        
+        {% block main %}
+
+    
+        {% endblock main %} 
+        
     </div>
 </div>
   
 
- <script src="https://unpkg.com/htmx.org@1.1.0"></script> 
- 
+ <script src="https://unpkg.com/htmx.org@1.1.0"></script>
+    
        
 </body>
 </html>

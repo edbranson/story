@@ -22,7 +22,7 @@
 <div class="float-right">
     <form action="{% url 'media-delete' pk=media.id %}" method = "POST" id="confirmDeleteMediaForm">
         {% csrf_token %}
-        <input class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Confirm Delete" id="confirmDelete" style="display: none">  
+        <input class="pt-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Confirm Delete" id="confirmDelete" style="display: none">  
     </form>
 </div>
 <div class="float-right">
@@ -32,7 +32,7 @@
 </div>
 <div class="float-right">
     <form action="{% url 'entry-create' med=media.id %}", method = "GET">
-        <input id="logEntryUsingBtn" class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Log entry using this Media.">
+        <input id="logEntryUsingBtn" class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Log entry using this Source.">
     </form>
 </div>
 <div class="text-center text-xl align-bottom">Source Select or Edit</div>

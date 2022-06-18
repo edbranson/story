@@ -1,161 +1,47 @@
-
-/* ______________________for sidebar______________ */
-.sidebar {
-	height: 100%;
-	width: 200px;
-	position: fixed;
-	z-index: 1;
-	top: 70px;
-	left: 0;
-	background-color: white;
-	overflow-x: hidden;
-	transition: 0.5s;
-	padding-top: 0px;
-	border: solid;
-  }
-  
-  .sidebar a {
-    text-align: left;  
-	padding: 8px 8px 8px 8px;
-	text-decoration: none;
-	font-size: 14px;
-	color: black;
-	display: block;
-	transition: 0.3s;
-  }
-  
-  .sidebar a:hover {
-	color: #dbf7c9;
-  }
-  
-  .sidebar .closebtn {
+/* Center the loader */
+#loader {
 	position: absolute;
-	top: 0;
-	right: 15px;
-	font-size: 36px;
-	margin-left: 60px;
+	left: 50%;
+	top: 50%;
+	z-index: 1;
+	width: 60px;
+	height: 60px;
+	margin: -76px 0 0 -76px;
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
   }
   
-  .openbtn {
-    position: fixed;
-	top: 10px;
-	left: 20px;  
-	font-size: 20px;
-	cursor: pointer;
-	background-color: rgb(132, 157, 238);
-	color: white;
-	padding: 10px 15px;
-	border: none;
+  @-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
   }
   
-  .openbtn:hover {
-	background-color: rgb(149, 209, 147);
+  @keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
   }
   
-  #main {
-    justify-content: center;   
-    margin-left: 200px; /* Same as the width of the sidenav */  
-	transition: margin-left .5s;
-	padding: 16px;
-  }
-    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-    @media screen and (max-height: 450px) {
-	.sidebar {padding-top: 15px;}
-	.sidebar a {font-size: 14px;}
+  /* Add animation to "page content" */
+  .animate-bottom {
+	position: relative;
+	-webkit-animation-name: animatebottom;
+	-webkit-animation-duration: 1s;
+	animation-name: animatebottom;
+	animation-duration: 1s
   }
   
-
-
-/* ______________________________________sidebar above _______________ */
-
-
-.cancelButton {
-	position: fixed;
-	top: 10px;
-	right: 10px;
-	background-color: rgb(132, 157, 238);	
-}
-.addButton {
-	position: fixed;
-	top: 10px;
-	right: 90px;
-	background-color: rgb(132, 157, 238);
-}
-
-.saveButton {
-	position: fixed;
-	top: 10px;
-	right: 90px;
-	background-color: rgb(132, 157, 238);
-}
-.deleteButton {
-	position: fixed;
-	top: 10px;
-	right: 160px;
-	background-color: rgb(132, 157, 238);
-}
-.confirmDeleteButton {
-	position: fixed;
-	top: 10px;
-	right: 240px;
-	background-color: rgb(132, 157, 238);
-}
-
-.closeButton {
-	position: fixed;
-	top: 10px;
-	left: 0px;
-	width: 200px;
-	higth: 200px;
-	font-size: 20px;
-	color: white;
-	text-align: right;
-	background-color: rgb(132, 157, 238);
-	padding: 10px 15px;
-	cursor: pointer;
-	border: none;
-}
-.closeButton:hover {
-	background-color: rgb(149, 209, 147);
+  @-webkit-keyframes animatebottom {
+	from { bottom:-100px; opacity:0 } 
+	to { bottom:0px; opacity:1 }
   }
-
-h3 {
-    text-align: center;
-}
-
-td {
-    padding: 15px;
-}
-
-.table-sortable th {
-    cursor: pointer;
-}
-
-.table-sortable .th-sort-asc::after {
-    content: "\25b4";
-}
-
-.table-sortable .th-sort-desc::after {
-    content: "\25be";
-}
-
-.table-sortable .th-sort-asc::after,
-.table-sortable .th-sort-desc::after {
-    margin-left: 5px;
-}
-
-.table-sortable .th-sort-asc,
-.table-sortable .th-sort-desc {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.modal-header {
-    padding: 10px 16px;
-    background: #555;
-    color: #f1f1f1;
-}
-
-.header {
-	position:sticky;
-	top: 0;
-}
+  
+  @keyframes animatebottom { 
+	from{ bottom:-100px; opacity:0 } 
+	to{ bottom:0; opacity:1 }
+  }
+  
+  
+  

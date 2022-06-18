@@ -143,7 +143,8 @@ class EntryCreate(LoginRequiredMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         media = get_object_or_404(Media, pk=kwargs['med'])
-        entries_ratings = Entry.objects.filter(media=kwargs['med']).values_list('rating', flat=True)
+        entries = Entry.objects.filter(media=kwargs['med']).exclude(status='WISHLIST')
+        entries_ratings = entries.values_list('rating', flat=True)
         entrieslen = len(entries_ratings)
         ratingsum = sum(entries_ratings)
         data = {"userId": request.user.id, "mediaId": media.id,}
@@ -256,7 +257,8 @@ class EntryEdit(LoginRequiredMixin, UpdateView):
     def post(self, request, pk): 
         entry = get_object_or_404(Entry, pk=pk)
         media = get_object_or_404(Media, pk=entry.media_id)
-        entries_ratings = Entry.objects.filter(media=entry.media_id).values_list('rating', flat=True)
+        entries = Entry.objects.filter(media=entry.media_id).exclude(status='WISHLIST')
+        entries_ratings = entries.values_list('rating', flat=True)
         entrieslen = len(entries_ratings)
         ratingsum = sum(entries_ratings)
         form = EntryForm(request.POST, instance=entry, userId=request.user.id)
