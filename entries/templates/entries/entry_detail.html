@@ -77,8 +77,10 @@
                     {% render_field form.rating class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %} 
                 </div>
                 <div>
+                    {% if user.id == entry.user.id %}
                     <label for="id_my_comment" class="italic ml-3 py-2">My private comment:</label>
                     {% render_field form.my_comment class="block pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
+                    {% endif %}
                 </div>
                 <div class="">
                     <label for="id_review" class="italic ml-3 py-2 ">Review</label>

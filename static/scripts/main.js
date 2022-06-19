@@ -53,8 +53,7 @@ for (i = 0; i < coll.length; i++) {
 
 function myFunction() { 
   var myVar; 
-  myVar = setTimeout(showPage, 1500);
-  console.log('we are at myFunction')
+  myVar = setTimeout(showPage, 2000);
 }
 
 function showPage() {

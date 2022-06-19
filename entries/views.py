@@ -240,10 +240,12 @@ class EntryList(View):
         sortby = col
         entry = Entry.objects.all()
         # if sortby != 'list':
-        #     entry = entry.order_by(sortby)            
+        #     entry = entry.order_by(sortby)
+        entry_total_count = entry.count()
+        count = {'total':entry_total_count,}            
         userList = Profile.objects.all()
 
-        context = {'entry': entry, 'users': userList}
+        context = {'entry': entry, 'users': userList, 'count':count,}
         return render(request, "entries/entry_list.html", context) 
 
 class EntryEdit(LoginRequiredMixin, UpdateView):

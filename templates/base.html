@@ -80,7 +80,9 @@
             <br>
             <div>    
                 <div class ="h-5 w-20 bg-color-red z-10"></div>
-                <img class="" src="{% static '/images/stars.png' %}" class="w-48 z-20">     
+                <img class="" src="{% static '/images/stars.png' %}" class="w-48 z-20">
+                <p class="italic">Filtered <span id="filteredCount" class="italic">0</span><span class="italic"> of</span></p>
+                <p id="totalCount"class="italic">{{count.total}} total records</p>     
             </div>
     
             {% block sideBar %}

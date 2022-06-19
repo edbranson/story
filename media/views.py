@@ -68,12 +68,15 @@ class MediaList(View):
     def get(self, request, col):  
         sortby = col
         media = Media.objects.all()
+        media_total_count = media.count()
+        count = {'total':media_total_count,}
+
         entries = Entry.objects.all()
         if sortby != 'list':
             media = media.order_by(sortby)            
       
 
-        context = {'media': media, 'entries': entries,}
+        context = {'media': media, 'entries': entries, 'count': count}
         return render(request, "media/media_list.html", context)
 
 class MediaSearch(LoginRequiredMixin,View):

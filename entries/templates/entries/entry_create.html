@@ -206,14 +206,12 @@
     var mm = String(today.getMonth() + 1).padStart(2, '0');
     var yyyy = String(today.getFullYear());
     today = mm + '/' + dd + '/' + yyyy
-    console.log(today)
 
     if (event === "eStart"){
         document.getElementById('eStart').value = today;
     }else if (event === "eFinish"){    
         document.getElementById('eFinish').value = today;
     }
-    console.log(document.getElementById('eFinish').value)
 }        
 </script>
 

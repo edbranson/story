@@ -185,11 +185,12 @@
                                 <th class="px-4 text-xl text-left"> Author</th>
                                 <th class="px-4 text-xl text-left"> Actors</th>
                                 <th class="px-4 text-xl text-left"> Type</th>
-                                <th class="px-4 text-xl text-left"> Status</th>
+                                <th class="px-4 text-xl text-left"> User</th>
                                 <th class="px-4 text-xl text-left"> Rating</th>           
                                 <th class="px-4 text-xl text-left"> </th>
                                 <th></th>          
-                                <th></th>          
+                                <th></th>
+                                <th></th>
                             </tr>
                             
                         </thead>
@@ -197,11 +198,11 @@
                             {% for entry in entry %}
                             <tr class="border border-gray-400" id= "entry- + {{entry.id}}" >
                                 <td class="" style="display:none" id="entryId">{{entry.id}}</td>
-                                <td class="w-3/12 p-2"id="entryTitle">{{entry.media.title}}</td>
-                                <td class="w-2/12" id="entryAuthor">{{entry.media.author}}</td>
-                                <td class="w-3/12" id="entryActors">{{entry.media.actors}}</td>
-                                <td class="w-1/12" id="entryType">{{entry.media.media_type}}</td>
-                                <td class="w-1/12" id="entryStatus">{{entry.status}}</td>
+                                <td class="w-3/12 p-2 text-left"id="entryTitle">{{entry.media.title}}</td>
+                                <td class="w-2/12 text-left" id="entryAuthor">{{entry.media.author}}</td>
+                                <td class="w-3/12 text-left" id="entryActors">{{entry.media.actors}}</td>
+                                <td class="w-1/12 text-left" id="entryType">{{entry.media.media_type}}</td>
+                                <td class="w-1/12 text-left" id="entryUser">{{entry.user.first_name}}</td>
                                 <td class="w-1/12 mb-2 relative ">
                                     <div style="width: calc(20% * {{entry.rating}})" class="bg-yellow-300 h-4 top-0 bottom-0 mt-2 z-10 absolute">`</div> 
                                     <img src="{% static '/images/stars.png' %}"  alt="{{entry.rating}}" title="{{entry.rating}}" class="top-0 bottom-0 mt-2 z-20 w-full absolute">   
@@ -209,8 +210,9 @@
                             
                                 <td class="w-1/12 pr-4 text-blue-600 ">
                                 <a href={% url 'entry-edit' pk=entry.id %} id="btn-editEntry" class="w-1/12 ml-2 btn btn-default" roll="button">View</a>                  
-                                <td class="invisible" id="entryProfile">{{entry.user.profile.id}}</td>
+                                <td class="invisible" id="entryUserId">{{entry.user.profile.id}}</td>
                                 <td class="invisible" id="entryRating">{{entry.rating}}</td>
+                                <td class="invisible" id="entryStatus">{{entry.status}}</td>
 
                             </tr>
                             {% endfor %}

@@ -39,8 +39,8 @@ function getSearchEvent() {
 function searchMediaTbody(event) {
     
     var rows = document.querySelector("#mediaTbody").rows;
+    var filteredRows = rows.length
     if (event=="clearAll"){
-        console.log("clearAll")
         var filter = ""
         document.getElementById('mediaSearchInput').value = filter 
         document.getElementById('mediaSearchInput').value.refresh
@@ -115,19 +115,25 @@ function searchMediaTbody(event) {
         var typeInRow = rows[i].cells[5].textContent;
         var typeFilterTest = typeChecked.includes(typeInRow);
         var ratingInRow = rows[i].cells[9].textContent;
-        var ratingFilterTest = ratingChecked.includes(ratingInRow);     
-
+        var ratingFilterTest = ratingChecked.includes(ratingInRow);
+        var filteredCount = document.getElementById('filteredCount').innerHTML     
         if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1
         || thirdCol.indexOf(filter) > -1) {
             if (typeFilterTest && ratingFilterTest){
-                rows[i].style.display = "";   
+                rows[i].style.display = "";
             }else{
-                rows[i].style.display = "none";
+                rows[i].style.display = "none";    
             }
         } else {
             rows[i].style.display = "none";
         }
-    }          
+        if (rows[i].style.display == 'none'){
+            filteredRows -= 1
+        }
+
+    } 
+    document.getElementById('filteredCount').innerHTML = filteredRows
+             
 }   
 
 //-------------------------------------------------------------------------------
@@ -138,7 +144,6 @@ function searchMediaTbody(event) {
 function searchTitleMediaTbody(event) {
 
     var rows = document.querySelector("#mediaEntryTbody").rows;
-    console.log(rows.length)
     if (event=="clearAll"){
         var filter = ""
         document.getElementById('mediaTitleSearchInput').value = filter 
@@ -186,11 +191,10 @@ function searchTitleMediaTbody(event) {
         var firstCol = rows[i].cells[1].textContent.toUpperCase();
         var typeInRow = rows[i].cells[5].textContent;
         var typeFilterTest = typeChecked.includes(typeInRow);
-          
 
         if (firstCol.indexOf(filter) > -1 ) {
             if (typeFilterTest ){
-                rows[i].style.display = "";   
+                rows[i].style.display = "";  
             }else{
                 rows[i].style.display = "none";
             }
@@ -207,9 +211,9 @@ function searchTitleMediaTbody(event) {
 function searchEntryTbody(event) {
     if (document.querySelector("#entryTbody")){
         var rows = document.querySelector("#entryTbody").rows;
+        var filteredRows = rows.length
     }
     if (event=="clearAll"){
-        console.log("clearAll")
         var filter = ""
         document.getElementById('entrySearchInput').value = filter 
         document.getElementById('entrySearchInput').value.refresh
@@ -331,7 +335,7 @@ function searchEntryTbody(event) {
         var thirdCol = rows[i].cells[3].textContent.toUpperCase();
         var userInRow = rows[i].cells[8].textContent;
         var userFilterTest = userChecked.includes(userInRow);
-        var statusInRow = rows[i].cells[5].textContent;
+        var statusInRow = rows[i].cells[10].textContent;
         var statusFilterTest = statusChecked.includes(statusInRow);     
         var typeInRow = rows[i].cells[4].textContent;
         var typeFilterTest = typeChecked.includes(typeInRow);
@@ -347,7 +351,11 @@ function searchEntryTbody(event) {
         } else {
             rows[i].style.display = "none";
         }
-    }          
+        if (rows[i].style.display == 'none'){
+            filteredRows -= 1
+        }
+    }
+    document.getElementById('filteredCount').innerHTML = filteredRows          
 }   
 
 
@@ -363,5 +371,4 @@ function myCollapse(event){
         content.style.display = "block";
  }
  }
-     
 

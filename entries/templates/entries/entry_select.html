@@ -26,7 +26,7 @@
                                 <th class="px-4 text-xl text-left"> Author</th>
                                 <th class="px-4 text-xl text-left"> Actors</th>
                                 <th class="px-4 text-xl text-left"> Type</th>
-                                <th class="px-4 text-xl text-left"> Status</th>
+                                <th class="px-4 text-xl text-left"> User</th>
                                 <th class="px-4 text-xl text-left"> Rating</th>           
                                 <th class="px-4 text-xl text-left"> </th>           
                                 <th class="px-4 text-xl text-left"> </th>           
@@ -41,7 +41,7 @@
                                 <td class="w-2/12" id="entryAuthor">{{entry.media.author}}</td>
                                 <td class="w-2/12" id="entryActors">{{entry.media.actors}}</td>
                                 <td class="w-1/12" id="entryType">{{entry.media.media_type}}</td>
-                                <td class="w-1/12" id="entryType">{{entry.status}}</td>
+                                <td class="w-1/12" id="entryUser">{{entry.user.first_name}}</td>
                                 <td class="w-1/12" id="entryRating">{{entry.rating}}</td>
                                 <td class="pr-4 text-blue-600">
                                 <a href={% url 'entry-edit' pk=entry.id %} id="btn-editEntry" class="w-1/12 btn btn-default" roll="button">View</a>                  
