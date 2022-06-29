@@ -113,13 +113,13 @@
         {% endblock topBar%}
         {% block main %}
         
-        <div id="main" class="inline-block overflow-scroll w-auto px-4 m-4 bg-gray-400">
+        <div id="main" class="overflow-scroll px-4 m-4 bg-gray-400">
             {% include "messages.html" %}
             <div class="" id="loader"></div>
-            <div class="loader block h-screen animate-bottom" id="mediaListTable">
+            <div class="loader block h-screen" id="mediaListTable">
                 <div class=" bg-white ">
                     <table class="" id="mediaTable">
-                        <thead class="bg-blue-100 border border-blue-800 sticky top-0">
+                        <thead class="bg-blue-100 border border-blue-800 sticky top-0 z-0">
                             <tr>
                                 <td></td>
                                 <td class="text-xl font-semibold">Source List</td>
@@ -128,6 +128,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td class="z-30"></td>
                             </tr>
                             <tr class="">                              
                                 <th class="px-4 text-xl text-left"> Title</th>
@@ -137,7 +138,7 @@
                                 <th class="px-4 text-xl text-left"> Type</th>           
                                 <th class="px-4 text-xl text-left"> Select</th>
                                 <th class="px-4 text-xl text-left"> </th>
-                                <th class="px-4 text-xl text-left"> Average</th>
+                                <th class="px-4 text-xl text-left z-30"> Average</th>
 
                             </tr>
                             <tr class="table-row">
@@ -179,8 +180,8 @@
                     </table>
                 </div>
             </div>
-</div>    
-<script tuype="text/javascript">
+        </div>    
+<script type="text/javascript">
     myFunction()
 </script>
 

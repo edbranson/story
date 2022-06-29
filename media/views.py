@@ -27,9 +27,9 @@ class MediaCreate(LoginRequiredMixin, View):
 
 class MediaCreateFor(LoginRequiredMixin, View):
     login_url = '/login/'
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         form = MediaForm()
-        context = {'form': form}
+        context = {'form': form,}
         return render(request, "media/media_create_for_entry.html", context)
 
     def post(self, request):

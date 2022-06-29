@@ -14,13 +14,7 @@
   </form>
 </div>
 <div class="float-right">
-  <form action="{% url 'entry-list' 'list' %}" , method="GET">
-    <input
-      class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center"
-      type="submit"
-      value="Cancel"
-    />
-  </form>
+  <button onclick="history.back()" class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center">Cancel</button>
 </div>
 
 <div class="text-center text-xl align-bottom">Clone Source and change the Format</div>
@@ -135,7 +129,7 @@
         /><br />
         <label for="id_media_type" class="italic">Format: (is read only)</label>
         <input
-        id="input_author_link"
+        id="input_media_type"
         class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
         type="text"
         size="20"

@@ -15,16 +15,10 @@
   </form>
 </div>
 <div class="float-right">
-  <form action="{% url 'media-list' col='list' %}" , method="GET">
-    <input
-      class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center"
-      type="submit"
-      value="Cancel"
-    />
-  </form>
+  <button onclick="history.back()" class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center">Cancel</button>
 </div>
 
-<div class="text-center text-xl align-bottom">Create a new Source</div>
+<div class="text-center text-xl align-bottom">Create Source</div>
 
 {% endblock topBar %} 
 {% block main %}
@@ -42,89 +36,117 @@
     >
       <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48" />
     </div>
-    <div
-      class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7"
-    >
-      <!--start column 1-->
-      <!--start colunm 2-->
+    <div class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">  
+      <label for="id_media_type" class="italic">Type:</label><br />
       <div class="flex-col">
+        <input type="radio" name=media_type value="TEXT"> Text
+        <input type="radio" name=media_type value="AUDIBLE"> Audible
+        <input type="radio" name=media_type value="VIDEO"> Video     
+      </div>
+    
+    </div>
+    <div class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">   
+      <div class="">
         <label for="id_title" class="italic">Title:</label>
         <input
           id="input_title"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
+          class="block pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
           type="text"
-          size="20"
+          size="18"
           maxlength="100"
           name="title"
           value="{{media.title}}"
         />
+      </div>
+    </div>
+    <div class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:row-start-2 lg:col-start-8 lg:col-end-13 xl:row-start-2 xl:col-start-7 ">  
+      <div class="" > 
         <label for="id_author" class="italic">Author:</label>
         <input
           id="input_author"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
+          class="block pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
           type="text"
-          size="20"
+          size="18"
           maxlength="100"
           name="author"
           value="{{media.author}}"
         />
-        <label for="id_reader" class="italic">Reader:</label>
-        <input
-          id="input_reader"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="20"
-          maxlength="100"
-          name="reader"
-          value="{{media.reader}}"
-        />
-        <label for="id_actors" class="italic">Actors:</label>
-        <input
-          id="input_actors"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="20"
-          maxlength="100"
-          name="actors"
-          value="{{media.actors}}"
-        />
+        </div>
+    </div>
+    <div class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">    
+        
+      <label for="id_reader" class="italic">Reader:</label>
+      <input
+        id="input_reader"
+        class="block pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+        type="text"
+        size="18"
+        maxlength="100"
+        name="reader"
+        value="{{media.reader}}"
+      />
+      
+    </div>  
+    <div class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:row-start-3 lg:col-start-8 lg:col-end-13 xl:row-start-3 xl:col-start-7 "> 
+      <label for="id_actors" class="italic">Actors:</label>
+      <input
+        id="input_actors"
+        class="block pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+        type="text"
+        size="18"
+        maxlength="100"
+        name="actors"
+        value="{{media.actors}}"
+      />
+    </div>
+    <div class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">  
+      <label for="id_subject" class="italic">Subject:</label><br />
+      <input
+      id="input_subject"
+      class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+      type="text"
+      size="18"
+      name="subject"
+      value="{{media.subject}}"
+      /><br />
+    </div>
+    <div class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:row-start-4 lg:col-start-8 lg:col-end-13 xl:row-start-4 xl:col-start-7 ">    
+      <label for="id_audience" class="italic">Audience:</label><br />
+      <input
+      id="input_audience"
+      class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+      type="text"
+      size="18"
+      name="audience"
+      value="{{media.audience}}"
+      y
+      /><br />
+    </div>
+    <div class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7">    
+      <label for="id_series" class="italic">Series:</label><br />
+      <input
+      id="input_series"
+      class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+      type="text"
+      size="18"
+      name="series"
+      value="{{media.series}}"
+      /><br />
+    </div>
+    <div class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:row-start-5 lg:col-start-8 lg:col-end-13 xl:row-start-5 xl:col-start-7 ">    
         <label for="id_published" class="italic">Published:</label>
         <input
           id="input_published"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
+          class="w-auto block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
           type="number"
+          min="4"
+          max="4"
           name="published"
           value="{{media.published}}"
           placeholder="yyyy"
         />
-        <label for="id_subject" class="italic">Subject:</label><br />
-        <input
-          id="input_subject"
-          class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="20"
-          name="subject"
-          value="{{media.subject}}"
-        /><br />
-        <label for="id_series" class="italic">Series:</label><br />
-        <input
-          id="input_series"
-          class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="30"
-          name="series"
-          value="{{media.series}}"
-        /><br />
-        <label for="id_audience" class="italic">Audience:</label><br />
-        <input
-          id="input_audience"
-          class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="20"
-          name="audience"
-          value="{{media.audience}}"
-          y
-        /><br />
+    </div>
+    <div>    
         <label for="id_author_link" class="italic">Author link:</label><br />
         <input
           id="input_author_link"
@@ -135,17 +157,6 @@
           value="{{media.author_link}}"
           y
         /><br />
-        <label for="id_media_type" class="italic">Type:</label><br />
-        <select
-          id="input_type"
-          class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
-          name="media_type"
-          value="{{media.media_type}}"
-        >
-          <option value="TEXT">Text</option>
-          <option value="VIDEO">Video</option>
-          <option value="AUDIBLE">Audible</option></select
-        ><br />
       </div>
     </div>
     <div
@@ -163,7 +174,7 @@
             <label for="id_promoDesc" class="italic"></label>
             <textarea
               id="input_promo_desc"
-              class="not-italic text-base"
+              class="not-italic text-base border border-blue-400 shadow-lg rounded"
               rows="15"
               cols="50"
               name="promo_desc"

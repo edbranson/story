@@ -34,17 +34,16 @@
         <input id="logEntryUsingBtn" class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Log entry using this Source.">
     </form>
 </div>
-<div class="text-center text-xl align-bottom">Source</div>
+<div class="text-center text-xl align-bottom">Source Select or Edit</div>
 {% endblock topBar %}
 {% block main %}
-<div class="col-start-2 col-end-6">
+
 <form class="mt-5 p-5" id="editMedia" action="{% url 'media-select' pk=media.id %}" method=POST >
       {% csrf_token %}
       {% load widget_tweaks %}
 <div class="grid grid-cols-3  md:gap-6 lg:gap-8" >
     <div class="p-10 row-start-1 row-end-7 col-start-1 col-end-3 sm:col-end-1 md:col-end-1 lg:col-end-1 xl:col-end-1">
-        <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48">
-        <p class="text-center">{{media.media_type}}</p>
+        <img class="" src="{% static '/images/jeep2.webp' %}" class="w-48">
     </div>
     <div class="col-span-3 sm:col-start-2 sm:col-span-2 md:col-start-2 md:col-span-2 lg:col-start-2 ">  
         <label for="id_media_type" class="italic">Type: (is read only)</label>
@@ -172,12 +171,14 @@
             <div class="">
                 <div class="bg-white ">
                     <button 
-                    class="collapsible flex items-center w-auto h-auto px-1 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none focus:visible"
+                    class="collapsible flex items-center w-auto h-auto px-1 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none visible"
                     type="button">Publisher info: (is read only)</button>
-                    <div class="px-3 ">
+                    <div class="px-3">
                         <label id="label_promo_desc" for="promo_desc" class="italic"></label>
-                        <textarea  id="input_promo_desc" class="not-italic text-base border border-blue-400 shadow-lg rounded" rows="10" cols="75" name="promo_desc" placeholder="Enter or 'paste' publisher information here." readonly>{{media.promo_desc}}</textarea>
-                    </div>                
+                        <textarea  id="input_promo_desc" class="not-italic text-base " rows="10" cols="75" name="promo_desc" readonly>{{media.promo_desc}}</textarea>
+                    </div>
+                    
+                    
                     
                 </div>
                 
@@ -185,7 +186,6 @@
         </div>         
     </div>    
 </form>
-</div>
     
     <script>
     const deleteP = document.getElementById("deleteMediaButton");

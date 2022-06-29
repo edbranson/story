@@ -24,39 +24,43 @@
     {% block extra_css %}
     
     {% endblock %}    
-</head class="h-full">
-<body class="h-full" onload="getSearchEvent()" hx-headers='{"X-CSRFToken": "{{ csrf_token}}"}'>
+</head class="">
+<body class="" onload="getSearchEvent()" hx-headers='{"X-CSRFToken": "{{ csrf_token}}"}'>
     {% load widget_tweaks %}    
 
-<div id="myNavBar" class="sticky top-0">
+<div id="myNavBar" class="sticky top-0 z-2 opacity-1">
     <!--Top Nav Bar -->
-    <div class="text-center text-2xl italic">Entertainment Journal</div>
-    <div id="" class="flex-row w-full h-12 bg-blue-100 border-2 border-black">
-        <div id="mySideNavOpen" class="hidden float-left w-10 m-2 text-center text-white bg-blue-600 border-black rounded h-7 " onclick="openNav()">☰</div>
+    <div class="">
+        <p class="text-center text-2xl italic">Entertainment Journal</p>
+    </div>
+    <div id="" class="flex-row w-full h-12 bg-blue-100 sm:bg-yellow-100 md:bg-green-100 lg:bg-purple-200 xl:bg-red-100 border-2 border-black opacity-1">
+        <div class="float-left">
+            <button id="mySideNavOpen" class="block sm:block md:hidden lg:hidden xl:hidden w-10 m-2 text-center text-white bg-blue-600 border-black rounded h-7" onclick="openNav()">☰</button>
+        </div>
+        
         
         <div class="float-right pt-1 m-2 text-sm text-center text-black bg-white border-black rounded h-7 w-19 ">
             {% if request.user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="btn">Logout</a>
+            <a href="{% url 'logout' %}" class="btn">Logout</a>
             {% else %}
-                <a href="{% url 'login' %}" class="btn">Login/Sign Up</a>
+            <a href="{% url 'login' %}" class="btn">Login/Sign Up</a>
             {% endif %}
         </div>
         
+        <div class="float-left">
+            <button id="mySideNavClose" onclick="closeNav()" class="hidden sm:hidden md:block lg:block xl:block float-left w-10 m-2 text-center text-white bg-blue-600 border-black rounded h-7">X</button>
+        </div>    
+        {% block topBar %}
         
-        <div id="mySideNavClose" class="float-left w-10 mt-2 mr-2 text-center text-white bg-blue-600 border-black rounded h-7 "> 
-            <p class="" type="button" onclick="closeNav()">X</p>
-        </div>
-    
-    {% block topBar %}
-    
-    {% endblock topBar %}    
+        {% endblock topBar %}
+   
     </div>
 </div>    
-<div class="grid grid-cols-8 gap-1 ">
-    <div id="mySideBar" class="col-start-1 col-end-3">
+<div class="grid grid-cols-5 gap-1 ">
+    <div id="mySideBar" class="col-span-6 sm:col-span-6 md:col-span-1 lg:col-span-1 xl:col-span-1 hidden sm:hidden md:block lg:block xl:block">
 
       
-        <div id="" class="inline-block h-screen w-full p-4 m-4 bg-blue-100">
+        <div id="" class="inline-block w-full p-4 m-4 ">
             <div>
                 <p>Current User is: {{user.first_name}}</p>
             </div>
@@ -92,7 +96,7 @@
     </div>   
     
 
-    <div id="mySideRight" class="col-start-3 col-end-9">
+    <div id="mySideRight" class="col-span-5 sm:col-span-5 md:col-start-2 md:col-end-6 lg:col-start-2 lg:col-end-6 xl:col-start-2 xl:col-end-6">
         
         
         <!--end of top Nav Bar-->

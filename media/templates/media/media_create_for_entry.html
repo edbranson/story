@@ -14,160 +14,167 @@
   </form>
 </div>
 <div class="float-right">
-  <form action="{% url 'entry-list' 'list' %}" , method="GET">
-    <input
-      class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center"
-      type="submit"
-      value="Cancel"
-    />
-  </form>
+  <button onclick="history.back()" class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center">Cancel</button>
+
 </div>
 
 <div class="text-center text-xl align-bottom">Source Create for a New Entry</div>
 
-{% endblock topBar %} {% block main %}
+{% endblock topBar %} 
 
-<form
-  class="mt-5 p-5"
-  id="createMediaEntry"
-  action="{% url 'media-createfor' %}"
-  method="POST"
->
-  {% csrf_token %}
-  {% load widget_tweaks %}
-  <div class="grid grid-cols-12 gap-1">
-    <div
-      class="p-10 row-start-1 row-end-5 col-start-1 col-end-10 sm:col-end-7 md:col-end-5 lg:col-end-4 xl:col-end-3"
-    >
-      <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48" />
-    </div>
-    <div
-      class="col-start-1 col-end-13 sm:col-start-7 md:col-start-5 lg:col-start-4 lg:col-end-8 xl:col-start-3 xl:col-end-7"
-    >
-      <!--start column 1-->
-      <!--start colunm 2-->
-      <div class="flex-col">
-        <label for="id_title" class="italic">Title: (is read only)</label>
-        <input
-          id="input_title"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="20"
-          maxlength="100"
-          name="title"
-          value="{{title.title}}"
-          readonlhy
-        />
-        <label for="id_author" class="italic">Author:</label>
-        <input
-          id="input_author"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="20"
-          maxlength="100"
-          name="author"
-          value="{{media.author}}"
-        />
-        <label for="id_reader" class="italic">Reader:</label>
+{% block sideBar %}
+  <div class="pt-10 pr-10 lg:pr-20 xl:pr-15">
+    <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48">
+  </div>
+
+{% endblock sideBar %}
+
+{% block main %}
+<div class="col-start-2 col-end-6">
+<form class="mt-1 p-1" id="createMediaEntry" action="{% url 'media-createfor' %}" method=POST >
+      {% csrf_token %}
+      {% load widget_tweaks %}
+  <div class="grid grid-cols-4  md:gap-6 lg:gap-8" >
+    
+    <div class="col-start-1 col-end-5">  
+        <label for="id_media_type" class="italic">Type: (is read only)</label>
+        <div class="flex-col">
+            <input onclick="return false;" type="radio" name=media_type value="TEXT" {% if type == "TEXT" %}checked{% endif %} readonly /> Text
+            <input onclick="return false;" type="radio" name=media_type value="AUDIBLE" {% if type == "AUDIBLE" %}checked{% endif %} readonly /> Audible
+            <input onclick="return false;" type="radio" name=media_type value="VIDEO" {% if type == "VIDEO" %}checked{% endif %} readonly /> Video  
+        </div> 
+      </div>
+      <div class="col-span-4 sm:col-span-4 md:col-span-4 lg:col-start-1 lg:col-end-3 xl:col-start-1 xl:col-end-3">   
+        <div class="">
+          <label id="label_title" for="id_title" class="italic">Title: (is read only)</label>
+          <input
+            id="input_title"
+            class="block pl-2 py-1 w-full not-italic text-base font-semibold border border-blue-400 shadow-lg rounded "
+            type="text"
+            maxlength="100"
+            name="title"
+            value="{{title.title}}"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-start-1 col-end-5 sm:col-start-1 sm:col-end-5 md:col-start-1 md:col-end-5 lg:col-start-3 lg:col-end-5 xl:col-start-3 xl:col-end-5">  
+        <div class="" > 
+          <label id="label_author" for="id_author" class="italic">Author: (is read only)</label>
+          <input
+            id="input_author"
+            class="block pl-2 py-1 w-full not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+            type="text"
+            maxlength="100"
+            name="author"
+            value="{{media.author}}"
+            readonly
+          />
+          </div>
+      </div>
+      <div class="col-span-4 sm:col-span-4 md:col-span-4 lg:col-start-1 lg:col-end-3 xl:col-start-1 xl:col-end-3">    
+        <label id="label_reader" for="id_reader" class="italic">Reader: (is read only)</label>
         <input
           id="input_reader"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
+          class="block pl-2 py-1 w-full not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
           type="text"
-          size="20"
           maxlength="100"
           name="reader"
           value="{{media.reader}}"
-        />
-        <label for="id_actors" class="italic">Actors:</label>
+          readonly
+        />        
+      </div>  
+      <div class="col-start-1 col-end-5 sm:col-start-1 sm:col-end-5 md:col-start-1 md:col-end-5 lg:col-start-3 lg:col-end-5 xl:col-start-3 xl:col-end-5"> 
+        <label id="label_actors" for="id_actors" class="italic">Actors: (is read only)</label>
         <input
           id="input_actors"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
+          class="block pl-2 py-1 w-full not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
           type="text"
-          size="20"
           maxlength="100"
           name="actors"
           value="{{media.actors}}"
+          readonly
         />
-        <label for="id_published" class="italic">Published:</label>
-        <input
-          id="input_published"
-          class="block pl-2 not-italic text-lg font-bold border border-blue-400 shadow-lg rounded"
-          type="number"
-          name="published"
-          value="{{media.published}}"
-          placeholder="yyyy"
-        />
-        <label for="id_subject" class="italic">Subject:</label><br />
-        <input
-          id="input_subject"
-          class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="20"
-          name="subject"
-          value="{{media.subject}}"
-        /><br />
-        <label for="id_series" class="italic">Series:</label><br />
-        <input
-          id="input_series"
-          class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="30"
-          name="series"
-          value="{{media.series}}"
-        /><br />
-        <label for="id_audience" class="italic">Audience:</label><br />
-        <input
-          id="input_audience"
-          class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="20"
-          name="audience"
-          value="{{media.audience}}"
-          y
-        /><br />
-        <label for="id_author_link" class="italic">Author link:</label><br />
-        <input
-          id="input_author_link"
-          class="pl-2 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
-          type="text"
-          size="20"
-          name="author_link"
-          value="{{media.author_link}}"
-          y
-        /><br />
-        <label for="id_media_type" class="italic">Format: (is read only)</label>
-        {% render_field form.media_type type="radio" class="hidden flex-col m-1 py-5 "%}
-        <p>{{type}}</p>
       </div>
-    </div>
-    <div
-      class="p-5 col-start-1 col-end-13 sm:col-start-7 sm:col-end-13 md:col-start-5 md:col-end-13 lg:col-start-8 lg:col-end-13 xl:col-start-7 xl:col-end-13"
-    >
-      <div class="">
-        <div class="bg-white ">
-          <button
-            class="collapsible flex items-center w-auto h-auto px-1 text-base text-gray-800 text-left bg-white transition focus:outline-none"
-            type="button"
-          >
-            Publisher info:
-          </button>
-          <div class="px-3">
-            <label for="id_promoDesc" class="italic"></label>
-            <textarea
-              id="input_promo_desc"
-              class="not-italic text-base"
-              rows="15"
-              cols="50"
-              name="promo_desc"
-            >
-                {{media.promo_desc}}
-            </textarea>
-          </div>
+      <div class="col-span-4 sm:col-span-4 md:col-span-4 lg:col-start-1 lg:col-end-3 xl:col-start-1 xl:col-end-3">  
+        <label id="label_subject" for="id_subject" class="italic">Subject: (is read only)</label><br />
+        <input
+        id="input_subject"
+        class="pl-2 py-1 w-full not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+        type="text"
+        name="subject"
+        value="{{media.subject}}"
+        readonly
+        />
+      </div>
+      <div class="col-start-1 col-end-5 sm:col-start-1 sm:col-end-5 md:col-start-1 md:col-end-5 lg:col-start-3 lg:col-end-5 xl:col-start-3 xl:col-end-5">    
+        <label id="label_audience" for="id_audience" class="italic">Audience: (is read only)</label><br />
+        <input
+        id="input_audience"
+        class="pl-2 py-1 w-full not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+        type="text"
+        name="audience"
+        value="{{media.audience}}"
+        readonly
+        />
+      </div>
+      <div class="col-span-4 sm:col-span-4 md:col-span-4 lg:col-start-1 lg:col-end-3 xl:col-start-1 xl:col-end-3">    
+        <label id="label_series" for="id_series" class="italic">Series: (is read only)</label><br />
+        <input
+        id="input_series"
+        class="pl-2 py-1 w-full not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+        type="text"
+        name="series"
+        value="{{media.series}}"
+        readonly
+        />
+      </div>
+      <div class="col-start-1 col-end-5 sm:col-start-1 sm:col-end-5 md:col-start-1 md:col-end-5 lg:col-start-3 lg:col-end-5 xl:col-start-3 xl:col-end-5">    
+          <label id="label_published" for="id_published" class="italic">Published: (is read only)</label>
+          <input
+            id="input_published"
+            class="block pl-2 py-1 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+            type="number"
+            size="6"
+            min="4"
+            max="4"
+            name="published"
+            value="{{media.published}}"
+            placeholder="yyyy"
+            readonly
+          />
+      </div>
+      <div class="col-start-1 col-end-3 ">    
+          <label id="label_author_link" for="id_author_link" class="italic">Author link: (is read only)</label><br />
+          <input
+            id="input_author_link"
+            class="pl-2 py-1 w-80 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded"
+            type="text"
+            name="author_link"
+            value="{{media.author_link}}"
+            readonly
+          />
         </div>
-      </div>
-    </div>
-  </div>
+
+   
+        <div class="col-start-1 col-end-3  ">
+            <div class="">
+                <div class="bg-white ">
+                    <button 
+                    class="collapsible flex items-center w-auto h-auto px-1 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none focus:visible"
+                    type="button">Publisher info: (is read only)</button>
+                    <div class="px-3 ">
+                        <label id="label_promo_desc" for="promo_desc" class="italic"></label>
+                        <textarea  id="input_promo_desc" class="not-italic text-base border border-blue-400 shadow-lg rounded" rows="10" cols="75" name="promo_desc" placeholder="Enter or 'paste' publisher information here." readonly>{{media.promo_desc}}</textarea>
+                    </div>                
+                    
+                </div>
+                
+            </div>
+        </div>
+      </div>              
 </form>
+</div>
 
 <script>
   const save = document.getElementById("createMediaEntrySave");

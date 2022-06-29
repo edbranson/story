@@ -90,11 +90,7 @@
                 </div>
                 <div >
                     <label for="id_tags" class="italic ml-3 pt-2">Tags:</label>
-                    <div class="grid grid-cols-5  ml-5">
-                        {% for tag in form.tags %}
-                            <div class="pr-2">{{tag}}</div>
-                        {% endfor %}
-                    </div>
+                    {% render_field form.tags class="flex flex-row pl-2 ml-3 not-italic text-base font-semibold border border-blue-400 shadow-lg rounded" %}
                 </div>
             </div>
         </form>

@@ -26,27 +26,32 @@
 </div>
 <div class="float-right">
     <div action="", >
-        <input id="allowChangesBtn" class="pt-1 px-2 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="button" value="Allow Changes">
+        <input id="allowChangesBtn" class="pt-1 px-2 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="button" value="Edit">
     </div>
 </div>
 <div class="float-right">
     <form action="{% url 'entry-create' med=media.id %}", method = "GET">
-        <input id="logEntryUsingBtn" class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Log entry using this Source.">
+        <input id="logEntryUsingBtn" class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Log entry">
     </form>
 </div>
 <div class="text-center text-xl align-bottom">Source</div>
 {% endblock topBar %}
+
+{% block sideBar%}
+  <div class="pt-10 pr-10 lg:pr-20 xl:pr-15">
+    <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48">
+  </div>
+
+{% endblock sideBar%}
+
 {% block main %}
 <div class="col-start-2 col-end-6">
-<form class="mt-5 p-5" id="editMedia" action="{% url 'media-select' pk=media.id %}" method=POST >
+<form class="mt-1 p-1" id="editMedia" action="{% url 'media-select' pk=media.id %}" method=POST >
       {% csrf_token %}
       {% load widget_tweaks %}
-<div class="grid grid-cols-3  md:gap-6 lg:gap-8" >
-    <div class="p-10 row-start-1 row-end-7 col-start-1 col-end-3 sm:col-end-1 md:col-end-1 lg:col-end-1 xl:col-end-1">
-        <img class="" src="{% static '/images/defaultbook.png' %}" class="w-48">
-        <p class="text-center">{{media.media_type}}</p>
-    </div>
-    <div class="col-span-3 sm:col-start-2 sm:col-span-2 md:col-start-2 md:col-span-2 lg:col-start-2 ">  
+  <div class="grid grid-cols-4  md:gap-6 lg:gap-8" >
+    
+    <div class="col-start-1 col-end-5">  
         <label for="id_media_type" class="italic">Type: (is read only)</label>
         <div class="flex-col">
             <input onclick="return false;" type="radio" name=media_type value="TEXT" {% if media.media_type == "TEXT" %}checked{% endif %} readonly /> Text
@@ -54,7 +59,7 @@
             <input onclick="return false;" type="radio" name=media_type value="VIDEO" {% if media.media_type == "VIDEO" %}checked{% endif %} readonly /> Video  
         </div> 
       </div>
-      <div class="col-start-1 col-end-4 sm:col-start-2 sm:col-end-4 md:col-start-2 md:col-end-4 lg:col-start-2 lg:col-end-3 xl:col-start-2 xl:col-end-3">   
+      <div class="col-span-4 sm:col-span-4 md:col-span-4 lg:col-start-1 lg:col-end-3 xl:col-start-1 xl:col-end-3">   
         <div class="">
           <label id="label_title" for="id_title" class="italic">Title: (is read only)</label>
           <input
@@ -68,7 +73,7 @@
           />
         </div>
       </div>
-      <div class="col-start-1 col-end-4 sm:col-start-2 sm:col-end-4 md:col-start-2 md:col-end-4 lg:col-start-3 lg:col-end-4 xl:col-start-3 xl:col-end-4">  
+      <div class="col-start-1 col-end-5 sm:col-start-1 sm:col-end-5 md:col-start-1 md:col-end-5 lg:col-start-3 lg:col-end-5 xl:col-start-3 xl:col-end-5">  
         <div class="" > 
           <label id="label_author" for="id_author" class="italic">Author: (is read only)</label>
           <input
@@ -82,7 +87,7 @@
           />
           </div>
       </div>
-      <div class="col-start-1 col-end-4 sm:col-start-2 sm:col-end-4 md:col-start-2 md:col-end-4 lg:col-start-2 lg:col-end-3 xl:col-start-2 xl:col-end-3">    
+      <div class="col-span-4 sm:col-span-4 md:col-span-4 lg:col-start-1 lg:col-end-3 xl:col-start-1 xl:col-end-3">    
         <label id="label_reader" for="id_reader" class="italic">Reader: (is read only)</label>
         <input
           id="input_reader"
@@ -94,7 +99,7 @@
           readonly
         />        
       </div>  
-      <div class="col-start-1 col-end-4 sm:col-start-2 sm:col-end-4 md:col-start-2 md:col-end-4 lg:col-start-3 lg:col-end-4 xl:col-start-3 xl:col-end-4"> 
+      <div class="col-start-1 col-end-5 sm:col-start-1 sm:col-end-5 md:col-start-1 md:col-end-5 lg:col-start-3 lg:col-end-5 xl:col-start-3 xl:col-end-5"> 
         <label id="label_actors" for="id_actors" class="italic">Actors: (is read only)</label>
         <input
           id="input_actors"
@@ -106,7 +111,7 @@
           readonly
         />
       </div>
-      <div class="col-start-1 col-end-4 sm:col-start-2 sm:col-end-4 md:col-start-2 md:col-end-4 lg:col-start-2 lg:col-end-3 xl:col-start-2 xl:col-end-3">  
+      <div class="col-span-4 sm:col-span-4 md:col-span-4 lg:col-start-1 lg:col-end-3 xl:col-start-1 xl:col-end-3">  
         <label id="label_subject" for="id_subject" class="italic">Subject: (is read only)</label><br />
         <input
         id="input_subject"
@@ -117,7 +122,7 @@
         readonly
         />
       </div>
-      <div class="col-start-1 col-end-4 sm:col-start-2 sm:col-end-4 md:col-start-2 md:col-end-4 lg:col-start-3 lg:col-end-4 xl:col-start-3 xl:col-end-4">    
+      <div class="col-start-1 col-end-5 sm:col-start-1 sm:col-end-5 md:col-start-1 md:col-end-5 lg:col-start-3 lg:col-end-5 xl:col-start-3 xl:col-end-5">    
         <label id="label_audience" for="id_audience" class="italic">Audience: (is read only)</label><br />
         <input
         id="input_audience"
@@ -128,7 +133,7 @@
         readonly
         />
       </div>
-      <div class="col-start-1 col-end-4 sm:col-start-2 sm:col-end-4 md:col-start-2 md:col-end-4 lg:col-start-2 lg:col-end-3 xl:col-start-2 xl:col-end-3">    
+      <div class="col-span-4 sm:col-span-4 md:col-span-4 lg:col-start-1 lg:col-end-3 xl:col-start-1 xl:col-end-3">    
         <label id="label_series" for="id_series" class="italic">Series: (is read only)</label><br />
         <input
         id="input_series"
@@ -139,7 +144,7 @@
         readonly
         />
       </div>
-      <div class="col-start-1 col-end-4 sm:col-start-2 sm:col-end-4 md:col-start-2 md:col-end-4 lg:col-start-3 lg:col-end-4 xl:col-start-3 xl:col-end-4">    
+      <div class="col-start-1 col-end-5 sm:col-start-1 sm:col-end-5 md:col-start-1 md:col-end-5 lg:col-start-3 lg:col-end-5 xl:col-start-3 xl:col-end-5">    
           <label id="label_published" for="id_published" class="italic">Published: (is read only)</label>
           <input
             id="input_published"
@@ -154,7 +159,7 @@
             readonly
           />
       </div>
-      <div class="p-3 col-start-1 col-end-3 ">    
+      <div class="col-start-1 col-end-3 ">    
           <label id="label_author_link" for="id_author_link" class="italic">Author link: (is read only)</label><br />
           <input
             id="input_author_link"
@@ -165,13 +170,12 @@
             readonly
           />
         </div>
-      </div>
-      <div
+
    
-        <div class="p-3 col-start-1 col-end-3  ">
+        <div class="col-start-1 col-end-3  ">
             <div class="">
                 <div class="bg-white ">
-                    <button 
+                    <button id="btn_promo_desc"
                     class="collapsible flex items-center w-auto h-auto px-1 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none focus:visible"
                     type="button">Publisher info: (is read only)</button>
                     <div class="px-3 ">
@@ -182,8 +186,8 @@
                 </div>
                 
             </div>
-        </div>         
-    </div>    
+        </div>
+      </div>              
 </form>
 </div>
     
@@ -236,7 +240,7 @@
         document.getElementById("input_audience").readOnly = false;
         document.getElementById("label_author_link").innerHTML = 'Author link:';
         document.getElementById("input_author_link").readOnly = false;
-        document.getElementById("label_promo_desc").innerHTML = 'Publisher info:';
+        document.getElementById("btn_promo_desc").innerHTML = 'Publisher info:';
         document.getElementById("input_promo_desc").readOnly = false;
         document.getElementById("editMediaSave").classList.remove("hidden");
         document.getElementById("allowChangesBtn").classList.add("hidden")

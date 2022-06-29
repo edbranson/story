@@ -1,9 +1,7 @@
 {% extends 'base.html' %} 
 {% block topBar %}
 <div class="float-right">
-    <form action="{% url 'entry-list' col='list' %}", method = "GET">
-        <input class="pt-1 px-1 m-2 h-7 w-auto bg-blue-600 border-black rounded text-sm text-white text-center" type="submit" value="Cancel">
-    </form>
+    <button onclick="history.back()" class="pt-1 m-2 h-7 w-14 bg-blue-600 border-black rounded text-sm text-white text-center">Cancel</button>
 </div>
 <div class=" float-right">
     <form action="{% url 'tag-create' %}", method="POST">
